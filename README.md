@@ -1,2 +1,2 @@
-chromatin_R
+chromatin_features
 ===========
