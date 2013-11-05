@@ -1,0 +1,2 @@
+# Ignore outputs from R command line execution
+*.Rout

@@ -1,0 +1,52 @@
+
+R version 2.15.2 (2012-10-26) -- "Trick or Treat"
+Copyright (C) 2012 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> # Dos datasets:
+> #   A) EXON.SHORTINTRONS.n
+> #   B) GENE.SHORTINTRONS.n
+> #
+> # Filtros:
+> #   A) Exones
+> #       A.1)
+> #           Erep <-(data[["num_FBtrs"]]/data[["FBtrs_per_gene"]]) # Exones donde anotaciones 5.49 y 5.50 son distintos!!    #Solo para data exon.shortintrons.n
+> #           data <- subset(data,Erep <= 1)
+> #       A.2)
+> #           data <- na.omit(data) #para el modelo mixto
+> #
+> #   B) Genes
+> #       B.1)
+> #           data <- na.omit(data)
+> #
+> #
+> #
+> #
+> #
+> 
+> library(car)
+> library(lattice)
+> library(ppcor)
+> 
+> rm(list = ls())
+> setwd("/home/sergio/chromatin/analysis/R/chromatin_features/")
+> 
+> # Load datasets
+> data<-read.table(file="EXON.SHORTINTRONS.n",header=TRUE,sep="\t")
+
+Execution halted

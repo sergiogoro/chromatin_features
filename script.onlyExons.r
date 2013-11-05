@@ -1,6 +1,9 @@
+#
+# EXONS
+#
 # Dos datasets:
 #   A) EXON.SHORTINTRONS.n
-#   B) GENE.SHORTINTRONS.n
+#   #B) GENE.SHORTINTRONS.n
 #
 # Filtros:
 #   A) Exones
@@ -10,7 +13,7 @@
 #       A.2)
 #           data <- na.omit(data) #para el modelo mixto
 #
-#   B) Genes
+#   #B) Genes
 #       B.1)
 #           data <- na.omit(data)
 #
@@ -28,7 +31,6 @@ setwd("/home/sergio/chromatin/analysis/R/chromatin_features/")
 
 # Load datasets
 data<-read.table(file="EXON.SHORTINTRONS.n",header=TRUE,sep="\t")
-data<-read.table(file="GENE.SHORTINTRONS.n",header=TRUE,sep="\t")
 
 #nrow(data)
 #data <- subset(data, chromosome != "X") #AUTOSOMES
@@ -73,12 +75,10 @@ m <- data[["mdmel_0f"]]+data[["mdmel_4f"]]+data[["mdmel_2f"]]
 		boxplot(omega_ins~num_FBtrs_factor,outline=F,xlab="Number of Transcripts/Exon",ylab="Ka/Kins")
         abline(h=median(omega_ins),col="black")
 
-		cor.test(omega_4f,data$num_FBtrs_factor,method="spearman")
-		cor.test(omega_ins,data$num_FBtrs_factor,method="spearman")
-		kruskal.test(omega_4f~num_FBtrs_factor)
-            kruskal.test(omega_4f~num_FBtrs_factor)[1] # K-W chi-squared
-            kruskal.test(omega_4f~num_FBtrs_factor)[3] # p-value
-		kruskal.test(omega_ins~num_FBtrs_factor)
+		cor.test(omega_4f,data$num_FBtrs,method="spearman")
+		cor.test(omega_ins,data$num_FBtrs,method="spearman")
+		kruskal.test(omega_4f~num_FBtrs)
+		kruskal.test(omega_ins~num_FBtrs)
 
 	
 
