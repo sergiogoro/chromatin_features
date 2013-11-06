@@ -1,2 +1,5 @@
 # Ignore outputs from R command line execution
 *.Rout
+
+# Ignore images
+*.png
