@@ -26,8 +26,8 @@ data<-read.table(file="EXON.SHORTINTRONS.n",header=TRUE,sep="\t")
 
 #nrow(data)
 data <- subset(data, chromosome != "X")                     #AUTOSOMES
-Erep <- ( data[["num_FBtrs"]] / data[["FBtrs_per_gene"]] )  # Exones donde anotaciones 5.49 y 5.50 son distintos!!    #Solo para data exon.shortintrons.n
-data <- subset(data,Erep <= 1)                              #Filtramos los que num_FBtrs/FBtrs_per_gene sean mayores que 1 (Casos que ocurren x usar rev5.49 y rev5.50)
+Erep <- (data[["num_FBtrs"]] / data[["FBtrs_per_gene"]])  # Exones donde anotaciones 5.49 y 5.50 son distintos!!    #Solo para data exon.shortintrons.n
+data <- subset(data, Erep <= 1)                              #Filtramos los que num_FBtrs/FBtrs_per_gene sean mayores que 1 (Casos que ocurren x usar rev5.49 y rev5.50)
 
 ### PopGen Summary Statistics ###
 
@@ -39,14 +39,14 @@ piins   <- data[["pi_ins"]] / data[["mdmel_ins"]]
 t4f     <- data[["seg_4f"]] / data[["mdmel_4f"]]
 t0f     <- data[["seg_0f"]] / data[["mdmel_0f"]]
 tins    <- data[["seg_ins"]] / data[["mdmel_ins"]]
-k4f     <- ( data[["div_4f"]] +1 ) / ( data[["mdyak_4f"]] +1 )
-k0f     <- ( data[["div_0f"]] +1 ) / ( data[["mdyak_0f"]] +1 )
-kins    <- ( ( data$div_ins +1 ) / ( data[["mdyak_ins"]] +1 ) )
+k4f     <- ( data[["div_4f"]] + 1 ) / ( data[["mdyak_4f"]] + 1 )
+k0f     <- ( data[["div_0f"]] + 1 ) / ( data[["mdyak_0f"]] + 1 )
+kins    <- ( ( data$div_ins + 1 ) / ( data[["mdyak_ins"]] + 1 ) )
 
 constraint_4f   <- t0f/t4f
 constraint_ins  <- t0f/tins
-omega_4f        <- ( k0f / k4f )            #Para boxplots
-omega_ins       <- ( k0f / kins )           #Para boxplots
+omega_4f        <- (k0f/k4f)            #Para boxplots
+omega_ins       <- (k0f/kins)           #Para boxplots
 m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 
 
@@ -56,55 +56,83 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 
     #Feature 1
 	### Transcripts (mRNAs per exon) ###
-	    cat( with( data, tapply( m, num_FBtrs, sum ) ), file = "OUT_Exons-autosomes" )
-		num_FBtrs_factor = cut( data[["num_FBtrs"]], c(0, 1, 2, 75) )
+
+        #Suma
+        #with( data, tapply( m, num_FBtrs, sum ) ) == tapply(m, data$num_FBtrs, sum)    #EQUIVALENT FUNCTIONS
+        #tapply(m, data$num_FBtrs, sum)
+        #str(tapply(m, data$num_FBtrs, sum))
+        #dimnames(tapply(m, data$num_FBtrs, sum))
+        write.table(tapply(m, data$num_FBtrs, sum), file="OUT_Exons-autosomes", col.names="(dimnames(tapply(m, data$num_FBtrs, sum)))", row.names=T, quote=T, append=T)
+
+		num_FBtrs_factor = cut( data[["num_FBtrs"]], c( 0, 1, 2, 75 ) )
 		
-        png( "EXONS-autosomes_omega4f-numFBtrs.png", width=1920, height=1080 )
+        png( "EXONS-autosomes_omega4f-numFBtrs.png", width = 1920, height = 1080 )
 		boxplot( omega_4f~num_FBtrs_factor, outline=F, xlab="Number of Transcripts/Exon", ylab="Ka/Ks", main="Omega 4f" )
 		abline( h = median( omega_4f ), col="black" )
-        #dev.off()
+        dev.off()
+
         png( "EXONS-autosomes_omegains-numFBtrs.png", width=1920, height=1080 )
 		boxplot( omega_ins ~ num_FBtrs_factor, outline=F, xlab="Number of Transcripts/Exon", ylab="Ka/Kins", main="Omega intrones pequeños" )
         abline( h = median( omega_ins ), col="black" )
-        #dev.off()
+        dev.off()
 
-        #cor.test(omega_4f, data$num_FBtrs_factor, method="spearman")
-            #cor.test(omega_4f,data$num_FBtrs_factor, method="spearman")[3]  # Spearman rho
-            #cor.test(omega_4f,data$num_FBtrs_factor, method="spearman")[4]  # Spearman p-value
-        write.table(cor.test(omega_4f,data$num_FBtrs_factor, method="spearman")[3], file = "OUT_Exons-autosomes", quote=T, row.names=F, append=T)
-        write.table( cor.test(omega_4f, data$num_FBtrs_factor, method="spearman")[4], file = "OUT_Exons-autosomes", quote=T, row.names=F, append=T  )
-		write.table( cor.test(omega_ins, data$num_FBtrs_factor, method="spearman")[3], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
-		write.table( cor.test(omega_ins, data$num_FBtrs_factor, method="spearman")[4], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
+        #cor.test(omega_4f, data$num_FBtrs, method="spearman")
+            #cor.test(omega_4f, data$num_FBtrs, method="spearman")$estimate     #Rho
+            #cor.test(omega_4f, data$num_FBtrs, method="spearman")$p.value      #p.value
+            #cor.test(omega_4f,data$num_FBtrs, method="spearman")[3]  # Spearman rho
+            #cor.test(omega_4f,data$num_FBtrs, method="spearman")[4]  # Spearman p-value
+        write.table( cor.test(omega_4f, data$num_FBtrs, method="spearman")$estimate, col.names="Omega_4f Spearman p-value", file = "OUT_Exons-autosomes", quote=F, row.names=F, append=T)
+        write.table( cor.test(omega_4f, data$num_FBtrs, method="spearman")$p.value, col.names="Omega_4f Spearman Rho", file = "OUT_Exons-autosomes", quote=F, row.names=F, append=T  )
+		write.table( cor.test(omega_ins, data$num_FBtrs, method="spearman")$estimate, col.names="Omega_ins Spearman p-value", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
+		write.table( cor.test(omega_ins, data$num_FBtrs, method="spearman")$p.value, col.names="Omega_ins Spearman Rho", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
 		
         #kruskal.test(omega_4f~num_FBtrs_factor)
+            #kruskal.test(omega_4f~num_FBtrs_factor)$statistic   #Chi-squared
+            #kruskal.test(omega_4f~num_FBtrs_factor)$p.value     #p.value
             #kruskal.test(omega_4f~num_FBtrs_factor)[1] # K-W chi-squared
             #kruskal.test(omega_4f~num_FBtrs_factor)[3] # p-value
-		write.table( kruskal.test( omega_4f ~ num_FBtrs_factor )[1], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
-		write.table( kruskal.test( omega_4f ~ num_FBtrs_factor )[3], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
-		write.table( kruskal.test( omega_ins ~ num_FBtrs_factor )[1], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
-		write.table( kruskal.test( omega_ins ~ num_FBtrs_factor )[3], file = "OUT_Exons-autosomes" , quote=T, row.names=F, append=T  )
+        write.table( kruskal.test( omega_4f ~ num_FBtrs_factor )$statistic, col.names="Omega_4f K-W chi-squared", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
+		write.table( kruskal.test( omega_4f ~ num_FBtrs_factor )$p.value, col.names="Omega_4f K-W p-value", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
+		write.table( kruskal.test( omega_ins ~ num_FBtrs_factor )$statistic, col.names="Omega_ins K-W chi-squared", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
+		write.table( kruskal.test( omega_ins ~ num_FBtrs_factor )$p.value, col.names="Omega_ins K-W p-value", file = "OUT_Exons-autosomes" , quote=F, row.names=F, append=T  )
 
 	
-#    #Feature 2
-#	### Exon Representativity ### 
-#		Erep <-(data[["num_FBtrs"]]/data[["FBtrs_per_gene"]])
-#		summary(Erep)
-#		
-#		alternative = cut(Erep,c(0,0.25,0.5,0.99,1))
-#		boxplot(omega_4f~alternative,outline=F,xlab="Exon Representativity",ylab="Ka/Ks")
-#		abline(h=median(omega_4f),col="black")
-#		with(data,tapply(m,alternative,sum))
-#
-#		hist(Erep,breaks=c(100))
-#		quantile(Erep,(0:2)/2)
-#		median(Erep)
-#		mean(Erep)
-#		sd(Erep)
-#		cor.test(omega_4f,Erep,method="spearman") #
-#		cor.test(omega_ins,Erep,method="spearman")
-#		kruskal.test(omega_4f~alternative)
-#		kruskal.test(omega_ins~alternative)
-#		
+    #Feature 2
+	### Exon Representativity ### 
+		Erep <- ( data[["num_FBtrs"]] / data[["FBtrs_per_gene"]] )
+        #summary( Erep )
+	
+        #Suma
+        #alternative = cut( Erep, c( 0, 0.25, 0.5, 0.99, 1 ) )
+        alternative <- cut( Erep, c( 0, 0.25, 0.5, 0.99, 1 ) )
+        #tapply(m, alternative, sum) 
+        write.table( tapply( m, alternative, sum ), col.names="(dimnames(tapply(m, alternative, sum)))", file="OUT_Exons-autosomes", quote=F, row.names=F, append=T )
+
+        png( "EXONS-autosomes_omega4f-exonRepresentativity.png", width = 1920, height = 1080 )
+		boxplot( omega_4f ~ alternative, outline=F, xlab="Exon Representativity", ylab="Ka/Ks" )
+		abline( h = median( omega_4f ), col="black" )
+        dev.off()
+
+        png( "EXONS-autosomes_Histogram.png", width = 1920, height = 1080 )
+		hist( Erep, breaks = c( 100 ) )
+        dev.off()
+
+		#quantile( Erep, ( 0:2 ) / 2 )
+        quantile_colnames <- names(quantile( Erep, ( 0:2 ) / 2 ))
+        names(quantile( Erep, ( 0:2 ) / 2 ))
+
+        write.table( quantile( Erep, ( 0:2 ) / 2 ), col.names=c(quantile_colnames[1], quantile_colnames[2], quantile_colnames[3]), file="OUT_Exons-autosomes", quote=F, row.names=F, append=T )
+        write.table( quantile( Erep, ( 0:2 ) / 2 ), col.names=quantile_colnames, file="OUT_Exons-autosomes", quote=F, row.names=F, append=T )
+
+		median( Erep )
+		mean( Erep )
+		sd( Erep )
+		cor.test( omega_4f, Erep, method="spearman" )
+		cor.test( omega_ins, Erep, method="spearman" )
+		kruskal.test( omega_4f ~ alternative )
+		kruskal.test( omega_ins ~ alternative )
+		
+    #Feature 3
 #	### Order ###
 #		with(data,tapply(m,order,sum))	
 #		cor.test(data$order,omega_4f,method="spearman") 
