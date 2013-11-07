@@ -1,5 +1,11 @@
 # Ignore outputs from R command line execution
 *.Rout
 
+# Ignore RData
+*.RData
+
 # Ignore images
 *.png
+
+# Ignore backups
+*.bak
