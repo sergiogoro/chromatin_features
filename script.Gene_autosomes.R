@@ -219,48 +219,96 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
     #kruskal.test(omega_ins~data[["num_cds"]])
 
 
-#	### Mean Distance between Exons ###
-#	plot(log(data$context_distance),log(omega_4f))
-#		
-#		cor.test(data$context_distance,omega_4f,method="spearman") # -0.24
-#		cor.test(data$context_distance,omega_ins,method="spearman") # -0.26
-#		
-#		cor.test(data$context_distance,data[["num_cds"]],method="spearman") # -0.15
-#		cor.test(data$context_distance,m,method="spearman") # -0.05
-#
-#		# si hay mas distancia entre exones (q es diferente a mas exones) omega se reduce drasticamente. Esto puede ser debido a que fijan menos
-#		# mutaciones ligeramente deletereas cuando se dan arrastres en exones colindantes
-#
-#	xyplot(pi4f~data[["context_distance"]])
-#		cor.test(pi4f,data$context_distance,method="spearman") # +0.023
-#		cor.test(piins,data$context_distance,method="spearman") # +0.075
-#	
-#	data$context_distance = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
-#	summary(data[["context_distance"]])
-#	with(data,tapply(m,data[["context_distance"]],sum))
-#	
-#	
-#	quantile(data$context_distance,(0:5)/5)
-#	median(data$context_distance)
-#	mean(data$context_distance)
-#	sd(data$context_distance)
-#	
-#	quantile(data[["stdev_distance"]],(0:5)/5)
-#	median(data$stdev_distance)
-#	mean(data$stdev_distance)
-#	sd(data$stdev_distance)
-#	
-#	boxplot(omega_4f~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	
-#	boxplot(omega_ins~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Kins")
-#	kruskal.test(omega_4f~data[["context_distance"]])
-#	kruskal.test(omega_ins~data[["context_distance"]])
-#	
-#	boxplot(m~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="m")
-#
-#	
-#	### Protein/Exon Length ###
+  ### Mean Distance between Exons ###
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature5: Mean distance between exons\n", file="OUT_GENES-autosomes", append=T )
+
+  data$context_distance = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
+  #summary(data[["context_distance"]])
+  cat("#tapply sum m~context_distance", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, data$context_distance, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+	
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_logContextDistance-logOmega4f.png", width = 1920, height = 1080 )
+  plot( log(data$context_distance), log(omega_4f) )
+  dev.off()
+		
+  cat( cor.test(data$context_distance, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # -0.24
+  cat( cor.test(data$context_distance, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
+  cat( cor.test(data$context_distance, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # -0.26
+  cat( cor.test(data$context_distance, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  #cor.test(data$context_distance,omega_4f,method="spearman") # -0.24
+  #cor.test(data$context_distance,omega_ins,method="spearman") # -0.26
+
+  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)      # -0.15
+  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
+  cat( cor.test(data$context_distance, m, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)              # -0.05
+  cat( cor.test(data$context_distance, m, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  #cor.test(data$context_distance,data[["num_cds"]],method="spearman") # -0.15
+  #cor.test(data$context_distance,m,method="spearman") # -0.05
+  # si hay mas distancia entre exones (q es diferente a mas exones) omega se reduce drasticamente. Esto puede ser debido a que fijan menos
+  # mutaciones ligeramente deletereas cuando se dan arrastres en exones colindantes
+
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_pi4f-contextDistance.png", width = 1920, height = 1080 )
+  xyplot(pi4f~data[["context_distance"]])
+  dev.off()
+
+  cat( cor.test(pi4f, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # +0.023
+  cat( cor.test(pi4f, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
+  cat( cor.test(piins, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # +0.075
+  cat( cor.test(piins, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  #cor.test(pi4f,data$context_distance,method="spearman") # +0.023
+  #cor.test(piins,data$context_distance,method="spearman") # +0.075
+	
+  #quantile(data$context_distance,(0:5)/5)  # Error in quantile.default(data$context_distance, (0:5)/5) : factors are not allowed
+	data$context_distance == data[["context_distance"]]
+	head(data$context_distance)
+	str(data$context_distance)
+  levels(data$context_distance)
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+
+	#quantile(data[["stdev_distance"]],(0:5)/5) # 0, 20, 40, 60, 80, 100 %
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$stdev_distance ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$stdev_distance ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$stdev_distance ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+	
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_omega4f-contextDistance.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_omegains-contextDistance.png", width = 1920, height = 1080 )
+	boxplot(omega_ins~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Kins")
+  dev.off()
+
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_m-contextDistance.png", width = 1920, height = 1080 )
+  boxplot(m~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="m")
+  dev.off()
+
+  cat( kruskal.test( omega_4f ~ data$context_distance )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ data$context_distance )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ data$context_distance )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ data$context_distance )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #kruskal.test(omega_4f~data[["context_distance"]])
+  #kruskal.test(omega_ins~data[["context_distance"]])
+	
+
+	
+	### Protein/Exon Length ###
 #		
 #	cor.test(m,omega_4f,method="spearman") #  gene |  exon
 #	cor.test(m,omega_ins,method="spearman") #  gene |  exon
