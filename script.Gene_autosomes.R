@@ -47,183 +47,187 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 ### Summary ###
 		
 #### GENE ###
-    #If exists previous file, move it to .bak
-    if (file.exists("OUT_GENES-autosomes")) {
-        file.rename("OUT_GENES-autosomes", "OUT_GENES-autosomes.bak")
-        file.remove("OUT_GENES-autosomes")
-    }
-    #Remove previous file
-    cat("###GENES-autosomes\n\n", file="OUT_GENES-autosomes", append=T)
+  #If exists previous file, move it to .bak
+  if (file.exists("OUT_GENES-autosomes")) {
+      file.rename("OUT_GENES-autosomes", "OUT_GENES-autosomes.bak")
+      file.remove("OUT_GENES-autosomes")
+  }
+  #Remove previous file
+  cat("###GENES-autosomes\n\n", file="OUT_GENES-autosomes", append=T)
 
-    #Feature 1
+  #Feature 1
 	### Messenger Complexity ###
-    cat("##Feature1: Messenger Complexity\n", file="OUT_GENES-autosomes", append=T)
+  cat("##Feature1: Messenger Complexity\n", file="OUT_GENES-autosomes", append=T)
 
 	mcomp <- (data$FBtrs_per_gene/data$num_cds)
-    #summary(mcomp)
+  #summary(mcomp)
 	mcomp2 = cut(mcomp,c(0,.25,0.4,0.5))
 	mcomp5 = cut(mcomp,quantile(mcomp,(0:5)/5))
-    #summary(mcomp5)
-    cat("#tapply sum m~mcomp5", file="OUT_GENES-autosomes", append=T)
+  #summary(mcomp5)
+  cat("#tapply sum m~mcomp5", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply(m, mcomp5, sum), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
-    png( "GENES-autosomes-FEAT1MessengerComplexity_Histogram-mcomp.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT1MessengerComplexity_Histogram-mcomp.png", width = 1920, height = 1080 )
 	hist(mcomp,breaks=c(50))
-    dev.off()
-    png( "GENES-autosomes-FEAT1MessengerComplexity_Histogram-contextDistance.png", width = 1920, height = 1080 )
+  dev.off()
+  png( "GENES-autosomes-FEAT1MessengerComplexity_Histogram-contextDistance.png", width = 1920, height = 1080 )
 	hist(data$context_distance,breaks=c(100))
-    dev.off()
+  dev.off()
 
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
-    cat( quantile( mcomp, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
-    #quantile(mcomp,(0:5)/5)
-
-    cat(median( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
-    cat(mean( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
-    cat(sd( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
-	
-
-    png( "GENES-autosomes-FEAT1MessengerComplexity_omega4f-mcomp5.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT1MessengerComplexity_omega4f-mcomp5.png", width = 1920, height = 1080 )
 	boxplot(omega_4f~mcomp5,outline=F,xlab="Number of Transcripts/Number of Exons",ylab="Ka/Ks") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
 	abline(h=median(omega_4f),col="black")
-    dev.off()
-    png( "GENES-autosomes-FEAT1MessengerComplexity_omegains-mcomp5.png", width = 1920, height = 1080 )
+  dev.off()
+
+  png( "GENES-autosomes-FEAT1MessengerComplexity_omegains-mcomp5.png", width = 1920, height = 1080 )
 	boxplot(omega_ins~mcomp5,outline=F,xlab="Number of Transcripts/Number of Exons",ylab="Ka/Kins") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
 	abline(h=median(omega_ins),col="black")	
-	        kruskal.test(omega_4f~mcomp5)
-	        kruskal.test(omega_ins~mcomp5)
-    dev.off()
-	
-	### chromosome and chromatin ###
-    cat("\n", file="OUT_GENES-autosomes", append=T)
-    cat("##Feature2: Chromosome and chromatin\n", file="OUT_GENES-autosomes", append=T)
+  dev.off()
 
-    cat("#tapply sum m~chromosome", file="OUT_GENES-autosomes", append=T)
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( mcomp, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #quantile(mcomp,(0:5)/5)
+
+  cat(median( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat(mean( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat(sd( mcomp ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+	
+  cat( kruskal.test( omega_4f ~ mcomp5 )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ mcomp5 )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ mcomp5 )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ mcomp5 )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #kruskal.test(omega_4f~mcomp5)
+  #kruskal.test(omega_ins~mcomp5)
+	
+  #Feature 2	
+  ### chromosome and chromatin ###
+  cat("\n", file="OUT_GENES-autosomes", append=T)
+  cat("##Feature2: Chromosome and chromatin\n", file="OUT_GENES-autosomes", append=T)
+
+  cat("#tapply sum m~chromosome", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply(m, data$chromosome, sum), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
-    cat("#tapply sum m~chromatin", file="OUT_GENES-autosomes", append=T)
+  cat("#tapply sum m~chromatin", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply(m, data$chromatin, sum), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
+  cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
 
-    cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
 
-    cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #Feature 3
+  ### Transcripts ###
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature3: Transcripts\n", file="OUT_GENES-autosomes", append=T )
 
+  cat("#tapply sum m~FBtrs_per_gene", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, data$FBtrs_per_gene, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
-	### Transcripts ###
-    cat( "\n", file="OUT_GENES-autosomes", append=T )
-    cat( "##Feature3: Transcripts\n", file="OUT_GENES-autosomes", append=T )
-
-    cat("#tapply sum m~FBtrs_per_gene", file="OUT_GENES-autosomes", append=T)
-	write.table( tapply( m, data$FBtrs_per_gene, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
-
-	data <-subset(data, FBtrs_per_gene < 11)
-	FBtrs = cut(data[["FBtrs_per_gene"]],c(0,1,2,5,75))
-    #summary(FBtrs)
-    cat("#tapply sum m~FBtrs", file="OUT_GENES-autosomes", append=T)
-	write.table( tapply( m, FBtrs, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  #data <-subset(data, FBtrs_per_gene < 11)
+  FBtrs = cut(data[["FBtrs_per_gene"]],c(0,1,2,5,75))
+  cat("#tapply sum m~FBtrsFiltered", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply(m,FBtrs,sum), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 	
-    png( "GENES-autosomes-FEAT3Transcripts_omega4f-FBtrs.png", width = 1920, height = 1080 )
-	boxplot(omega_4f ~ FBtrs, outline=F,xlab="Number of Transcripts/Gene",ylab="Ka/Ks")
-	abline(h=median(omega_4f),col="black")
-    dev.off()
+  png( "GENES-autosomes-FEAT3Transcripts_omega4f-FBtrs.png", width = 1920, height = 1080 )
+  boxplot(omega_4f ~ FBtrs, outline=F,xlab="Number of Transcripts/Gene",ylab="Ka/Ks")
+  abline(h=median(omega_4f),col="black")
+  dev.off()
 
-    png( "GENES-autosomes-FEAT3Transcripts_omegains-FBtrs.png", width = 1920, height = 1080 )
-	boxplot(omega_ins ~ FBtrs, outline=F,xlab="Number of Transcripts/Gene",ylab="Ka/Kins")
-	abline(h=median(omega_4f),col="black")
-    dev.off()
+  png( "GENES-autosomes-FEAT3Transcripts_omegains-FBtrs.png", width = 1920, height = 1080 )
+  boxplot(omega_ins ~ FBtrs, outline=F,xlab="Number of Transcripts/Gene",ylab="Ka/Kins")
+  abline(h=median(omega_4f),col="black")
+  dev.off()
 
-    png( "GENES-autosomes-FEAT3Transcripts_pi4f-FBtrs.png", width = 1920, height = 1080 )
-	boxplot(pi4f ~ FBtrs, outline=F, xlab="Number of Transcripts/Gene", ylab="Ka/Ks")
-    dev.off()
+  png( "GENES-autosomes-FEAT3Transcripts_pi4f-FBtrs.png", width = 1920, height = 1080 )
+  boxplot(pi4f ~ FBtrs, outline=F, xlab="Number of Transcripts/Gene", ylab="Ka/Ks")
+  dev.off()
 
-    png( "GENES-autosomes-FEAT3Transcripts_piins-FBtrs.png", width = 1920, height = 1080 )
-	boxplot(piins ~ FBtrs, outline=F, xlab="Number of Transcripts/Gene", ylab="Ka/Kins")
-    dev.off()
+  png( "GENES-autosomes-FEAT3Transcripts_piins-FBtrs.png", width = 1920, height = 1080 )
+  boxplot(piins ~ FBtrs, outline=F, xlab="Number of Transcripts/Gene", ylab="Ka/Kins")
+  dev.off()
 
+  cat( cor.test(omega_4f, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)
+  cat( cor.test(omega_4f, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
+  cat( cor.test(omega_ins, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)
+  cat( cor.test(omega_ins, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
 
-    cat( cor.test(omega_4f, FBtrs, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)
-    cat( cor.test(omega_4f, FBtrs, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
-    cat( cor.test(omega_ins, FBtrs, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)
-    cat( cor.test(omega_ins, FBtrs, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          #-0.069
+  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      #-0.069
+  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      #ns
+  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   #ns
 
-    cat( cor.test(pi4f, FBtrs, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          #-0.069
-    cat( cor.test(pi4f, FBtrs, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      #-0.069
-    cat( cor.test(piins, FBtrs, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      #ns
-    cat( cor.test(piins, FBtrs, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   #ns
+  cat( kruskal.test( omega_4f ~ data$FBtrs_per_gene )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ data$FBtrs_per_gene )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ data$FBtrs_per_gene )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ data$FBtrs_per_gene )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
 
-    cat( kruskal.test( omega_4f ~ FBtrs )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_4f ~ FBtrs )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-    cat( kruskal.test( omega_ins ~ FBtrs )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_ins ~ FBtrs )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
-
-
+  #Feature 4
 	### Number of Exons ###
-    cat( "\n", file="OUT_GENES-autosomes", append=T )
-    cat( "##Feature4: Number of Exons\n", file="OUT_GENES-autosomes", append=T )
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature4: Number of Exons\n", file="OUT_GENES-autosomes", append=T )
 
-    cat("#tapply sum m~num_CDS", file="OUT_GENES-autosomes", append=T)
+  cat("#tapply sum m~num_CDS", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply( m, data$num_cds, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
-	data <-subset(data, num_cds < 11)
+  #data <-subset(data, num_cds < 11)
 	exons = cut(data[["num_cds"]],c(0,1,2,3,4,5,6,8,11,16,114))     #Revisar factores
-    #summary(exons)
-    cat("#tapply sum m~exons", file="OUT_GENES-autosomes", append=T)
+  #summary(exons)
+  cat("#tapply sum m~exons", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply( m, exons, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
-    png( "GENES-autosomes-FEAT4NumberOfExons_omega4f-exons.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT4NumberOfExons_omega4f-exons.png", width = 1920, height = 1080 )
 	boxplot(omega_4f~exons,outline=F,xlab="Number of Exons/Gene",ylab="Ka/Ks")
 	abline(h=median(omega_4f),col="black")
-    dev.off()
+  dev.off()
 
-    png( "GENES-autosomes-FEAT4NumberOfExons_omegains-numCDS.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT4NumberOfExons_omegains-numCDS.png", width = 1920, height = 1080 )
 	boxplot(omega_ins~data[["num_cds"]],outline=F,xlab="Number of Exons/Gene",ylab="Ka/Kins")
-    dev.off()
+  dev.off()
 
-    png( "GENES-autosomes-FEAT4NumberOfExons_pi4f-numCDS.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT4NumberOfExons_pi4f-numCDS.png", width = 1920, height = 1080 )
 	boxplot(pi4f~data[["num_cds"]],outline=F)
-    dev.off()
+  dev.off()
 
-    png( "GENES-autosomes-FEAT4NumberOfExons_piins-numCDS.png", width = 1920, height = 1080 )
+  png( "GENES-autosomes-FEAT4NumberOfExons_piins-numCDS.png", width = 1920, height = 1080 )
 	boxplot(piins~data[["num_cds"]],outline=F)
-    dev.off()
+  dev.off()
 	
-    cat( cor.test(omega_4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)           # -0.2219826
-    cat( cor.test(omega_4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)       # -0.2219826
-    cat( cor.test(omega_ins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)       #
-    cat( cor.test(omega_ins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)    #
-    #cor.test(omega_4f,data$num_cds,method="spearman") # -0.2219826 
-    #cor.test(omega_ins,data$num_cds,method="spearman") # 
+  cat( cor.test(omega_4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)           # -0.2219826
+  cat( cor.test(omega_4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)       # -0.2219826
+  cat( cor.test(omega_ins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)       #
+  cat( cor.test(omega_ins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)    #
+  #cor.test(omega_4f,data$num_cds,method="spearman") # -0.2219826 
+  #cor.test(omega_ins,data$num_cds,method="spearman") # 
 
-    cat( cor.test(pi4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # +0.037
-    cat( cor.test(pi4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      # +0.037
-    cat( cor.test(piins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # +0.093
-    cat( cor.test(piins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   # +0.093
-    #cor.test(pi4f,data$num_cds,method="spearman") # +0.037
-    #cor.test(piins,data$num_cds,method="spearman") # +0.093
+  cat( cor.test(pi4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # +0.037
+  cat( cor.test(pi4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      # +0.037
+  cat( cor.test(piins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # +0.093
+  cat( cor.test(piins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   # +0.093
+  #cor.test(pi4f,data$num_cds,method="spearman") # +0.037
+  #cor.test(piins,data$num_cds,method="spearman") # +0.093
 
-    cat( kruskal.test( omega_4f ~ exons )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_4f ~ exons )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["num_cds"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-    cat( kruskal.test( omega_ins ~ data[["num_cds"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
-    #kruskal.test(omega_4f~exons)
-    #kruskal.test(omega_ins~data[["num_cds"]])
+  cat( kruskal.test( omega_4f ~ exons )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ exons )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["num_cds"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ data[["num_cds"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #kruskal.test(omega_4f~exons)
+  #kruskal.test(omega_ins~data[["num_cds"]])
 
-
+  #Feature 5
   ### Mean Distance between Exons ###
   cat( "\n", file="OUT_GENES-autosomes", append=T )
   cat( "##Feature5: Mean distance between exons\n", file="OUT_GENES-autosomes", append=T )
 
-  data$context_distance = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
+  #data$context_distance = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
+  context_distance_factor = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
   #summary(data[["context_distance"]])
   cat("#tapply sum m~context_distance", file="OUT_GENES-autosomes", append=T)
   write.table( tapply( m, data$context_distance, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
@@ -260,22 +264,18 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   #cor.test(piins,data$context_distance,method="spearman") # +0.075
 	
   #quantile(data$context_distance,(0:5)/5)  # Error in quantile.default(data$context_distance, (0:5)/5) : factors are not allowed
-	data$context_distance == data[["context_distance"]]
-	head(data$context_distance)
-	str(data$context_distance)
-  levels(data$context_distance)
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
-  #cat( quantile( data$context_distance, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$context_distance, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
   cat( median( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
   cat( mean( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
   cat( sd( data$context_distance ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
 
 
-	#quantile(data[["stdev_distance"]],(0:5)/5) # 0, 20, 40, 60, 80, 100 %
+  #quantile(data[["stdev_distance"]],(0:5)/5) # 0, 20, 40, 60, 80, 100 %
   cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
   cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
   cat( quantile( data$stdev_distance, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
@@ -307,30 +307,52 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   #kruskal.test(omega_ins~data[["context_distance"]])
 	
 
-	
+	#Feature 6
 	### Protein/Exon Length ###
-#		
-#	cor.test(m,omega_4f,method="spearman") #  gene |  exon
-#	cor.test(m,omega_ins,method="spearman") #  gene |  exon
-#
-#	quantile(m,(0:5)/5)
-#	median(m)
-#	mean(m)
-#	sd(m)
-#	
-#	m5 = cut(m,quantile(m,(0:5)/5))
-#	m3 = cut(m,c(0,1533,2372,52503))
-#	
-#	with(data,tapply(m,m5,sum))
-#	summary(m5)
-#	
-#	boxplot(omega_4f~m3,outline=F,xlab="Protein Length",ylab="Ka/Ks") 
-#	abline(h=median(omega_4f),col="black")
-#	
-#	boxplot(omega_ins~m,outline=F,xlab="Protein Length",ylab="Ka/Kins")
-#	kruskal.test(omega_4f~m)
-#	kruskal.test(omega_ins~m)	
-#				
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature6: Protein/Exon length\n", file="OUT_GENES-autosomes", append=T )
+
+	m5 = cut( m, quantile( m, ( 0:5 ) / 5 ) )
+	m3 = cut( m, c( 0, 1533, 2372, 52503 ) )
+  cat("#tapply sum m~m5", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, m5, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  #tapply( m, m5, sum )
+  #summary( m 5)
+
+  cat( quantile( m, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( m, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( m, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( m, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( m, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( m, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  #quantile( m, ( 0:5 ) / 5 )
+  cat( median( m ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( m ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( m ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+	
+  png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_omega4f-m3.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~m3,outline=F,xlab="Protein Length",ylab="Ka/Ks") 
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+  png( "GENES-autosomes-FEAT6ProteinExonLength_omegains-m.png", width = 1920, height = 1080 )
+	boxplot(omega_ins~m,outline=F,xlab="Protein Length",ylab="Ka/Kins")
+  dev.off()
+
+  cat( cor.test(m, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)
+  cat( cor.test(m, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
+  cat( cor.test(m, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)
+  cat( cor.test(m, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  #cor.test( m, omega_4f, method="spearman" ) #  gene |  exon
+  #cor.test( m, omega_ins, method="spearman" ) #  gene |  exon
+
+  cat( kruskal.test( omega_4f ~ m )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_4f ~ m )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  cat( kruskal.test( omega_ins ~ m )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  cat( kruskal.test( omega_ins ~ m )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #kruskal.test(omega_4f~m)
+  #kruskal.test(omega_ins~m)	
+				
 #	### Expression ###
 #	
 #	data[["bias_dev_rpkm"]] = cut(data[["bias_dev_rpkm"]],quantile(data[["bias_dev_rpkm"]],(0:5)/5))
@@ -456,7 +478,7 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #		boxplot(pi4f~data[["stage"]],outline=F)
 #		boxplot(piins~data[["stage"]],outline=F)
 #
-#		data<-subset(data, bias_dev > 0.8)
+#		#data<-subset(data, bias_dev > 0.8)
 #		boxplot(omega_4f~data[["stage"]],outline=F)
 #		abline(h=median(omega_4f),col="black")
 #		boxplot(data$bias_dev~data[["stage"]],outline=F)
