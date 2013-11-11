@@ -343,135 +343,262 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   cat( cor.test(m, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
   cat( cor.test(m, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)
   cat( cor.test(m, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
-  #cor.test( m, omega_4f, method="spearman" ) #  gene |  exon
-  #cor.test( m, omega_ins, method="spearman" ) #  gene |  exon
 
   cat( kruskal.test( omega_4f ~ m )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
   cat( kruskal.test( omega_4f ~ m )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
   cat( kruskal.test( omega_ins ~ m )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
   cat( kruskal.test( omega_ins ~ m )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
-  #kruskal.test(omega_4f~m)
-  #kruskal.test(omega_ins~m)	
-				
-#	### Expression ###
-#	
-#	data[["bias_dev_rpkm"]] = cut(data[["bias_dev_rpkm"]],quantile(data[["bias_dev_rpkm"]],(0:5)/5))
-#	data[["bias_tis_rpkm"]] = cut(data[["bias_tis_rpkm"]],quantile(data[["bias_tis_rpkm"]],(0:5)/5))
-#	data[["bias_str_rpkm"]] = cut(data[["bias_str_rpkm"]],quantile(data[["bias_str_rpkm"]],(0:5)/5))
-#	data[["max_dev_rpkm"]] = cut(data[["max_dev_rpkm"]],quantile(data[["max_dev_rpkm"]],(0:5)/5))
-#	data[["max_tissue_rpkm"]] = cut(data[["max_tissue_rpkm"]],quantile(data[["max_tissue_rpkm"]],(0:5)/5))
-#	data[["max_str_rpkm"]] = cut(data[["max_str_rpkm"]],quantile(data[["max_str_rpkm"]],(0:5)/5))
-#
-#	with(data,tapply(m,data[["bias_dev_rpkm"]],sum))
-#	summary(data[["bias_dev_rpkm"]])
-#	with(data,tapply(m,data[["bias_tis_rpkm"]],sum))
-#	summary(data[["bias_tis_rpkm"]])	
-#	with(data,tapply(m,data[["bias_str_rpkm"]],sum))
-#	summary(data[["bias_str_rpkm"]])
-#	with(data,tapply(m,data[["max_dev_rpkm"]],sum))
-#	summary(data[["max_dev_rpkm"]])
-#	with(data,tapply(m,data[["max_tissue_rpkm"]],sum))
-#	summary(data[["max_tissue_rpkm"]])	
-#	with(data,tapply(m,data[["max_str_rpkm"]],sum))
-#	summary(data[["max_str_rpkm"]])
-#	
-#	
-#	quantile(data[["bias_dev_rpkm"]],(0:5)/5)
-#	median(data[["bias_dev_rpkm"]])
-#	mean(data[["bias_dev_rpkm"]])
-#	sd(data[["bias_dev_rpkm"]])	
-#
-#	quantile(data[["bias_tis_rpkm"]],(0:5)/5)
-#	median(data[["bias_tis_rpkm"]])
-#	mean(data[["bias_tis_rpkm"]])
-#	sd(data[["bias_tis_rpkm"]])		
-#
-#	quantile(data[["bias_str_rpkm"]],(0:5)/5)
-#	median(data[["bias_str_rpkm"]])
-#	mean(data[["bias_str_rpkm"]])
-#	sd(data[["bias_str_rpkm"]])		
-#
-#	quantile(data[["max_dev_rpkm"]],(0:5)/5)
-#	median(data[["max_dev_rpkm"]])
-#	mean(data[["max_dev_rpkm"]])
-#	sd(data[["max_dev_rpkm"]])	
-#
-#	quantile(data[["max_tissue_rpkm"]],(0:5)/5)
-#	median(data[["max_tissue_rpkm"]])
-#	mean(data[["max_tissue_rpkm"]])
-#	sd(data[["max_tissue_rpkm"]])		
-#
-#	quantile(data[["max_str_rpkm"]],(0:5)/5)
-#	median(data[["max_str_rpkm"]])
-#	mean(data[["max_str_rpkm"]])
-#	sd(data[["max_str_rpkm"]])		
-#
-#	boxplot(omega_4f~data[["bias_dev_rpkm"]],outline=F,xlab="Developmental Expression Bias",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["bias_tis_rpkm"]],outline=F,xlab="Tissue Expression Bias",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["bias_str_rpkm"]],outline=F,xlab="Stress Expression Bias",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	
-#	boxplot(omega_4f~data[["max_dev_rpkm"]],outline=F,xlab="Log(Maximum Developmental Expression)",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["max_tissue_rpkm"]],outline=F,xlab="Log(Maximum Tissue Expression)",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["max_str_rpkm"]],outline=F,xlab="Log(Maximum Stress Expression)",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	
-#	kruskal.test(omega_4f~data[["bias_dev_rpkm"]])
-#	kruskal.test(omega_4f~data[["bias_tis_rpkm"]])
-#	kruskal.test(omega_4f~data[["bias_str_rpkm"]])
-#	kruskal.test(omega_4f~data[["max_dev_rpkm"]])
-#	kruskal.test(omega_4f~data[["max_tissue_rpkm"]])
-#	kruskal.test(omega_4f~data[["max_str_rpkm"]])
-#	
-#	kruskal.test(omega_ins~data[["bias_dev_rpkm"]])
-#	kruskal.test(omega_ins~data[["bias_tis_rpkm"]])
-#	kruskal.test(omega_ins~data[["bias_str_rpkm"]])
-#	kruskal.test(omega_ins~data[["max_dev_rpkm"]])
-#	kruskal.test(omega_ins~data[["max_tissue_rpkm"]])
-#	kruskal.test(omega_ins~data[["max_str_rpkm"]])
-#	
-#	cor.test(data[["bias_dev"]],data[["max_dev"]],method="spearman") #
-#	cor.test(data[["bias_tis"]],data[["max_tissue"]],method="spearman") #
-#	cor.test(data[["bias_str"]],data[["max_str"]],method="spearman") #
-#	
-#	cor.test(data[["bias_dev_rpkm"]],data[["max_dev_rpkm"]],method="spearman") #
-#	cor.test(data[["bias_tis_rpkm"]],data[["max_tissue_rpkm"]],method="spearman") #   
-#	cor.test(data[["bias_str_rpkm"]],data[["max_str_rpkm"]],method="spearman") #
-#
-#	cor.test(data[["bias_dev_rpkm"]],data[["bias_tis_rpkm"]],method="spearman") #
-#	cor.test(data[["bias_dev_rpkm"]],data[["bias_str_rpkm"]],method="spearman") #   
-#	cor.test(data[["bias_tis_rpkm"]],data[["bias_str_rpkm"]],method="spearman") #	
-#
-#	cor.test(data[["max_dev_rpkm"]],data[["max_tissue_rpkm"]],method="spearman") #
-#	cor.test(data[["max_dev_rpkm"]],data[["max_str_rpkm"]],method="spearman") #   
-#	cor.test(data[["max_tissue_rpkm"]],data[["max_str_rpkm"]],method="spearman") #	
-#	
-#	cor.test(omega_4f,data$bias_dev,method="spearman") # 
-#	cor.test(omega_4f,data$max_dev,method="spearman") #
-#	cor.test(omega_4f,data$bias_dev_rpkm,method="spearman") #
-#	cor.test(omega_4f,data[["max_dev_rpkm"]],method="spearman") # 
-#	
-#	cor.test(omega_4f,data$bias_tis,method="spearman") # 
-#	cor.test(omega_4f,data$max_tissue,method="spearman") # 
-#	cor.test(omega_4f,data$bias_tis_rpkm,method="spearman") #
-#	cor.test(omega_4f,data[["max_tissue_rpkm"]],method="spearman") #	
-#
-#	cor.test(omega_4f,data$bias_str,method="spearman") # 
-#	cor.test(omega_4f,data[["max_str"]],method="spearman") # 
-#	cor.test(omega_4f,data$bias_str_rpkm,method="spearman") # 
-#	cor.test(omega_4f,data[["max_str_rpkm"]],method="spearman") # 	
-#
-#	cor.test(omega_ins,data$bias_dev_rpkm,method="spearman") #
-#	cor.test(omega_ins,data[["max_dev_rpkm"]],method="spearman") # 
-#	cor.test(omega_ins,data$bias_tis_rpkm,method="spearman") #
-#	cor.test(omega_ins,data[["max_tissue_rpkm"]],method="spearman") #
-#	cor.test(omega_ins,data$bias_str_rpkm,method="spearman") # 
-#	cor.test(omega_ins,data[["max_str_rpkm"]],method="spearman") # 	
-#	
+
+  #Feature 7
+	### Expression ###
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature7: Expression\n", file="OUT_GENES-autosomes", append=T )
+	
+	bias_dev_rpkm_Factor    <- cut(data[["bias_dev_rpkm"]],quantile(data[["bias_dev_rpkm"]],(0:5)/5))
+	bias_tis_rpkm_Factor    <- cut(data[["bias_tis_rpkm"]],quantile(data[["bias_tis_rpkm"]],(0:5)/5))
+	bias_str_rpkm_Factor    <- cut(data[["bias_str_rpkm"]],quantile(data[["bias_str_rpkm"]],(0:5)/5))
+	max_dev_rpkm_Factor     <- cut(data[["max_dev_rpkm"]],quantile(data[["max_dev_rpkm"]],(0:5)/5))
+	max_tissue_rpkm_Factor  <- cut(data[["max_tissue_rpkm"]],quantile(data[["max_tissue_rpkm"]],(0:5)/5))
+	max_str_rpkm_Factor     <- cut(data[["max_str_rpkm"]],quantile(data[["max_str_rpkm"]],(0:5)/5))
+
+  cat("#tapply sum m~bias_dev_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, bias_dev_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~bias_tis_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, bias_tis_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~bias_str_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, bias_str_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~max_dev_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, max_dev_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~max_tissue_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, max_tissue_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~max_str_rpkm", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, max_str_rpkm_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+	
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_dev_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$bias_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$bias_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$bias_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_tis_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$bias_tis_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$bias_tis_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$bias_tis_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$bias_str_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$bias_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$bias_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$bias_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_dev_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$max_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$max_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$max_dev_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_tissue_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$max_tissue_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$max_tissue_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$max_tissue_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$max_str_rpkm, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$max_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Median", append=T)
+  cat( mean( data$max_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="Mean", append=T)
+  cat( sd( data$max_str_rpkm ), file="OUT_GENES-autosomes", fill=T, labels="SD", append=T)
+
+  png( "GENES-autosomes-FEAT7Expression_omega4f-biasDevRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["bias_dev_rpkm"]],outline=F,xlab="Developmental Expression Bias",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+
+  png( "GENES-autosomes-FEAT7Expression_omega4f-biasTisRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["bias_tis_rpkm"]],outline=F,xlab="Tissue Expression Bias",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+
+  png( "GENES-autosomes-FEAT7Expression_omega4f-biasStrRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["bias_str_rpkm"]],outline=F,xlab="Stress Expression Bias",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+  png( "GENES-autosomes-FEAT7Expression_omega4f-MaxDevRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["max_dev_rpkm"]],outline=F,xlab="Log(Maximum Developmental Expression)",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+  png( "GENES-autosomes-FEAT7Expression_omega4f-MaxTissueRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["max_tissue_rpkm"]],outline=F,xlab="Log(Maximum Tissue Expression)",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+  png( "GENES-autosomes-FEAT7Expression_omega4f-MaxStrRpkm.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["max_str_rpkm"]],outline=F,xlab="Log(Maximum Stress Expression)",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+	
+
+  cat( kruskal.test( omega_4f ~ data$bias_dev_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$bias_dev_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_dev_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$bias_tis_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_tis_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$bias_tis_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_tis_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$bias_str_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$bias_str_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_str_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$max_dev_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$max_dev_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_dev_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$max_tissue_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_tissue_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$max_tissue_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_tissue_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$max_str_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$max_str_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_str_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_dev_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_tis_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_tis_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_str_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_dev_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_tissue_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_tissue_rpkm)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_str_rpkm)", append=T  )
+
+	
+  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev ~ max_dev)", append=T)
+  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev ~ max_dev)", append=T)
+  #cor.test(data[["bias_dev"]],data[["max_dev"]],method="spearman")
+
+  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis ~ max_tissue)", append=T)
+  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis ~ max_tissue)", append=T)
+
+  cat( cor.test(data$bias_str, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_str ~ max_str)", append=T)
+  cat( cor.test(data$bias_str, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_str ~ max_str)", append=T)
+	
+  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
+
+  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
+
+  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_str_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_str_rpkm ~ max_str_rpkm)", append=T)
+
+  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
+
+  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
+
+  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
+
+  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
+
+  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_dev_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_dev_rpkm ~ max_str_rpkm)", append=T)
+
+  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_tissue_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_tissue_rpkm ~ max_str_rpkm)", append=T)
+	
+  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_dev)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_dev)", append=T)
+
+  cat( cor.test(omega_4f, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_dev)", append=T)
+  cat( cor.test(omega_4f, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_dev)", append=T)
+
+  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_dev_rpkm)", append=T)
+
+  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_dev_rpkm)", append=T)
+	
+  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_tis)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_tis)", append=T)
+
+  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_tissue)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_tissue)", append=T)
+
+  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_tis_rpkm)", append=T)
+
+  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_tissue_rpkm)", append=T)
+
+  cat( cor.test(omega_4f, data$bias_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_str)", append=T)
+  cat( cor.test(omega_4f, data$bias_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_str)", append=T)
+
+  cat( cor.test(omega_4f, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_str)", append=T)
+  cat( cor.test(omega_4f, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_str)", append=T)
+
+  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_str_rpkm)", append=T)
+
+  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_str_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$bias_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ bias_dev_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$bias_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ bias_dev_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ max_dev_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ max_dev_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ bias_tis_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ max_tissue_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ bias_str_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ bias_str_rpkm)", append=T)
+
+  cat( cor.test(omega_ins, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ max_str_rpkm)", append=T)
+  cat( cor.test(omega_ins, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ max_str_rpkm)", append=T)
+	
+
 #		### Expression Stage ###
 #
 #		data$stage = factor(data$stage, levels=c("em0-2hr","em2-4hr","em4-6hr","em6-8hr","em8-10hr","em10-12hr","em12-14hr","em14-16hr","em16-18hr","em18-20hr","em20-22hr","em22-24hr","L1","L2","L3_12hr","L3_PS1-2","L3_PS3-6","L3_PS7-9","WPP","WPP_12hr","WPP_24hr","WPP_2days","WPP_3days","WPP_4days","AdF_Ecl_1day","AdM_Ecl_1day","AdF_Ecl_5days","AdM_Ecl_5days","AdF_Ecl_30days","AdM_Ecl_30days"))
