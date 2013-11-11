@@ -159,10 +159,10 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   cat( cor.test(omega_ins, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)
   cat( cor.test(omega_ins, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
 
-  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          #-0.069
-  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      #-0.069
-  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      #ns
-  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   #ns
+  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Pi_4f Spearman Rho", append=T)          #-0.069
+  cat( cor.test(pi4f, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Pi_4f Spearman p-value", append=T)      #-0.069
+  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman Rho", append=T)      #ns
+  cat( cor.test(piins, data$FBtrs_per_gene, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman p-value", append=T)   #ns
 
   cat( kruskal.test( omega_4f ~ data$FBtrs_per_gene )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
   cat( kruskal.test( omega_4f ~ data$FBtrs_per_gene )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
@@ -207,10 +207,10 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   #cor.test(omega_4f,data$num_cds,method="spearman") # -0.2219826 
   #cor.test(omega_ins,data$num_cds,method="spearman") # 
 
-  cat( cor.test(pi4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # +0.037
-  cat( cor.test(pi4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)      # +0.037
-  cat( cor.test(piins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # +0.093
-  cat( cor.test(piins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)   # +0.093
+  cat( cor.test(pi4f, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Pi_4f Spearman Rho", append=T)          # +0.037
+  cat( cor.test(pi4f, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Pi_4f Spearman p-value", append=T)      # +0.037
+  cat( cor.test(piins, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman Rho", append=T)      # +0.093
+  cat( cor.test(piins, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman p-value", append=T)   # +0.093
   #cor.test(pi4f,data$num_cds,method="spearman") # +0.037
   #cor.test(piins,data$num_cds,method="spearman") # +0.093
 
@@ -243,10 +243,10 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   #cor.test(data$context_distance,omega_4f,method="spearman") # -0.24
   #cor.test(data$context_distance,omega_ins,method="spearman") # -0.26
 
-  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)      # -0.15
-  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
-  cat( cor.test(data$context_distance, m, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)              # -0.05
-  cat( cor.test(data$context_distance, m, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="num_cds Spearman Rho", append=T)      # -0.15
+  cat( cor.test(data$context_distance, data$num_cds, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="num_cds Spearman p-value", append=T)
+  cat( cor.test(data$context_distance, m, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="m Spearman Rho", append=T)              # -0.05
+  cat( cor.test(data$context_distance, m, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="m Spearman p-value", append=T)
   #cor.test(data$context_distance,data[["num_cds"]],method="spearman") # -0.15
   #cor.test(data$context_distance,m,method="spearman") # -0.05
   # si hay mas distancia entre exones (q es diferente a mas exones) omega se reduce drasticamente. Esto puede ser debido a que fijan menos
@@ -256,10 +256,10 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   xyplot(pi4f~data[["context_distance"]])
   dev.off()
 
-  cat( cor.test(pi4f, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Omega_4f Spearman Rho", append=T)          # +0.023
-  cat( cor.test(pi4f, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f Spearman p-value", append=T)
-  cat( cor.test(piins, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho", append=T)      # +0.075
-  cat( cor.test(piins, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+  cat( cor.test(pi4f, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes",fill=T, labels="Pi_4f Spearman Rho", append=T)          # +0.023
+  cat( cor.test(pi4f, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Pi_4f Spearman p-value", append=T)
+  cat( cor.test(piins, data$context_distance, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman Rho", append=T)      # +0.075
+  cat( cor.test(piins, data$context_distance, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Pi_ins Spearman p-value", append=T)
   #cor.test(pi4f,data$context_distance,method="spearman") # +0.023
   #cor.test(piins,data$context_distance,method="spearman") # +0.075
 	
@@ -488,97 +488,96 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   cat( kruskal.test( omega_4f ~ data$max_str_rpkm )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_str_rpkm)", append=T  )
   cat( kruskal.test( omega_4f ~ data$max_str_rpkm )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_str_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_dev_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (bias_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (bias_dev_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_tis_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_tis_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (bias_tis_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_tis_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (bias_tis_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (bias_str_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (bias_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (bias_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$bias_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (bias_str_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_dev_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (max_dev_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_dev_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (max_dev_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_tissue_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_tissue_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (max_tissue_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_tissue_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (max_tissue_rpkm)", append=T  )
 
-  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared (max_str_rpkm)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value (max_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared (max_str_rpkm)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$max_str_rpkm)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value (max_str_rpkm)", append=T  )
 
 	
-  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev ~ max_dev)", append=T)
-  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev ~ max_dev)", append=T)
-  #cor.test(data[["bias_dev"]],data[["max_dev"]],method="spearman")
+  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_dev ~ max_dev)", append=T)
+  cat( cor.test(data$bias_dev, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_dev ~ max_dev)", append=T)
 
-  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis ~ max_tissue)", append=T)
-  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis ~ max_tissue)", append=T)
+  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_tis ~ max_tissue)", append=T)
+  cat( cor.test(data$bias_tis, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_tis ~ max_tissue)", append=T)
 
-  cat( cor.test(data$bias_str, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_str ~ max_str)", append=T)
-  cat( cor.test(data$bias_str, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_str ~ max_str)", append=T)
+  cat( cor.test(data$bias_str, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_str ~ max_str)", append=T)
+  cat( cor.test(data$bias_str, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_str ~ max_str)", append=T)
 	
-  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
-  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_dev_rpkm ~ max_dev_rpkm)", append=T)
 
-  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
-  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_tis_rpkm ~ max_tissue_rpkm)", append=T)
 
-  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_str_rpkm ~ max_str_rpkm)", append=T)
-  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_str_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_str_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$bias_str_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_str_rpkm ~ max_str_rpkm)", append=T)
 
-  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
-  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_dev_rpkm ~ bias_tis_rpkm)", append=T)
 
-  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
-  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_dev_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_dev_rpkm ~ bias_str_rpkm)", append=T)
 
-  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
-  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
+  cat( cor.test(data$bias_tis_rpkm, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (bias_tis_rpkm ~ bias_str_rpkm)", append=T)
 
-  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
-  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (max_dev_rpkm ~ max_tissue_rpkm)", append=T)
 
-  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_dev_rpkm ~ max_str_rpkm)", append=T)
-  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_dev_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (max_dev_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_dev_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (max_dev_rpkm ~ max_str_rpkm)", append=T)
 
-  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (max_tissue_rpkm ~ max_str_rpkm)", append=T)
-  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (max_tissue_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (max_tissue_rpkm ~ max_str_rpkm)", append=T)
+  cat( cor.test(data$max_tissue_rpkm, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (max_tissue_rpkm ~ max_str_rpkm)", append=T)
 	
-  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_dev)", append=T)
-  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_dev)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_dev)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_dev)", append=T)
 
-  cat( cor.test(omega_4f, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_dev)", append=T)
-  cat( cor.test(omega_4f, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_dev)", append=T)
+  cat( cor.test(omega_4f, data$max_dev, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_dev)", append=T)
+  cat( cor.test(omega_4f, data$max_dev, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_dev)", append=T)
 
-  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_dev_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_dev_rpkm)", append=T)
 
-  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_dev_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_dev_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_dev_rpkm)", append=T)
 	
-  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_tis)", append=T)
-  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_tis)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_tis)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_tis)", append=T)
 
-  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_tissue)", append=T)
-  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_tissue)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_tissue)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_tissue)", append=T)
 
-  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_tis_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_tis_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_tis_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_tis_rpkm)", append=T)
 
-  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_tissue_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_tissue_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_tissue_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_tissue_rpkm)", append=T)
 
-  cat( cor.test(omega_4f, data$bias_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_str)", append=T)
-  cat( cor.test(omega_4f, data$bias_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_str)", append=T)
+  cat( cor.test(omega_4f, data$bias_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_str)", append=T)
+  cat( cor.test(omega_4f, data$bias_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_str)", append=T)
 
-  cat( cor.test(omega_4f, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_str)", append=T)
-  cat( cor.test(omega_4f, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_str)", append=T)
+  cat( cor.test(omega_4f, data$max_str, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_str)", append=T)
+  cat( cor.test(omega_4f, data$max_str, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_str)", append=T)
 
-  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ bias_str_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ bias_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ bias_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$bias_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ bias_str_rpkm)", append=T)
 
-  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_4f ~ max_str_rpkm)", append=T)
-  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_4f ~ max_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman Rho (omega_4f ~ max_str_rpkm)", append=T)
+  cat( cor.test(omega_4f, data$max_str_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_4f Spearman p-value (omega_4f ~ max_str_rpkm)", append=T)
 
   cat( cor.test(omega_ins, data$bias_dev_rpkm, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman Rho (omega_ins ~ bias_dev_rpkm)", append=T)
   cat( cor.test(omega_ins, data$bias_dev_rpkm, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Omega_ins Spearman p-value (omega_ins ~ bias_dev_rpkm)", append=T)
@@ -630,9 +629,9 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   dev.off()
 
   # AQUI
-  png( "GENES-autosomes-FEAT8ExpressionStage_DbiasNorm-stage.png", width = 1920, height = 1080 )
-	boxplot(data$Dbias_norm~data[["stage"]],outline=F)
-  dev.off()
+  # png( "GENES-autosomes-FEAT8ExpressionStage_DbiasNorm-stage.png", width = 1920, height = 1080 )
+  #	boxplot(data$Dbias_norm~data[["stage"]],outline=F)
+  # dev.off()
 	
   embryo <- subset(data, stage == "em0-2hr" | stage == "em2-4hr" | stage =="em4-6hr"| stage =="em6-8hr"| stage =="em8-10hr"| stage =="em10-12hr"| stage =="em12-14hr"| stage =="em14-16hr"| stage =="em16-18hr"| stage =="em18-20hr"| stage =="em20-22hr"| stage =="em22-24hr" )
 	larvae <- subset(data, stage == "L1"| stage =="L2"| stage =="L3_12hr"| stage =="L3_PS1-2"| stage =="L3_PS3-6"| stage =="L3_PS7-9")
@@ -644,68 +643,138 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   boxplot((embryo[["div_0f"]]/embryo[["mdmel_0f"]])/(embryo[["div_4f"]]/embryo[["mdmel_4f"]]),(larvae[["div_0f"]]/larvae[["mdmel_0f"]])/(larvae[["div_4f"]]/larvae[["mdmel_4f"]]),(pupae[["div_0f"]]/pupae[["mdmel_0f"]])/(pupae[["div_4f"]]/pupae[["mdmel_4f"]]),(adult_male[["div_0f"]]/adult_male[["mdmel_0f"]])/(adult_male[["div_4f"]]/adult_male[["mdmel_4f"]]),(adult_female[["div_0f"]]/adult_female[["mdmel_0f"]])/(adult_female[["div_4f"]]/adult_female[["mdmel_4f"]]),outline=F)
   dev.off()
 
+  #Feature 9
+	### Recombination ###
+  cat( "\n", file="OUT_GENES-autosomes", append=T )
+  cat( "##Feature9: Recombination\n", file="OUT_GENES-autosomes", append=T )
 
-#	### Recombination ###
-#	
-#	data[["mcvean_10kb"]] = cut(data[["mcvean_10kb"]],quantile(data[["mcvean_10kb"]],(0:5)/5))
-#	data[["mcvean_100kb"]] = cut(data[["mcvean_100kb"]],quantile(data[["mcvean_100kb"]],(0:5)/5))
-#	data[["mcvean_1Mb"]] = cut(data[["mcvean_1Mb"]],quantile(data[["mcvean_1Mb"]],(0:5)/5))
-#	data[["comeron_100kb"]] = cut(data[["comeron_100kb"]],quantile(data[["comeron_100kb"]],(0:5)/5))
-#	
-#	with(data,tapply(m,data[["mcvean_10kb"]],sum))
-#	summary(data[["mcvean_10kb"]])
-#	with(data,tapply(m,data[["mcvean_100kb"]],sum))
-#	summary(data[["mcvean_100kb"]])
-#	with(data,tapply(m,data[["comeron_100kb"]],sum))
-#	summary(data[["comeron_100kb"]])	
-#	
-#	boxplot(omega_4f~data[["mcvean_10kb"]],outline=F,xlab="rho 10kb",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["mcvean_100kb"]],outline=F,xlab="rho 100kb",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_4f~data[["mcvean_1Mb"]],outline=F,xlab="rho 1Mb",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")	
-#	boxplot(omega_4f~data[["comeron_100kb"]],outline=F,xlab="cM/Mb 100kb",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")	
-#	
-#	quantile(data[["mcvean_10kb"]],(0:5)/5)
-#	median(data[["mcvean_10kb"]])
-#	mean(data[["mcvean_10kb"]])
-#	sd(data[["mcvean_10kb"]])
-#	quantile(data[["mcvean_100kb"]],(0:5)/5)
-#	median(data[["mcvean_100kb"]])
-#	mean(data[["mcvean_100kb"]])
-#	sd(data[["mcvean_100kb"]])
-#	quantile(data[["mcvean_1Mb"]],(0:5)/5)
-#	median(data[["mcvean_1Mb"]])
-#	mean(data[["mcvean_1Mb"]])
-#	sd(data[["mcvean_1Mb"]])
-#	quantile(data[["comeron_100kb"]],(0:5)/5)
-#	median(data[["comeron_100kb"]])
-#	mean(data[["comeron_100kb"]])
-#	sd(data[["comeron_100kb"]])	
-#	
-#		cor.test(data[["mcvean_10kb"]],omega_4f,method="spearman")
-#		cor.test(data[["mcvean_10kb"]],omega_ins,method="spearman")
-#		cor.test(data[["mcvean_100kb"]],omega_4f,method="spearman")
-#		cor.test(data[["mcvean_100kb"]],omega_ins,method="spearman")
-#		cor.test(data[["mcvean_1Mb"]],omega_4f,method="spearman")
-#		cor.test(data[["mcvean_1Mb"]],omega_ins,method="spearman")
-#
-#		cor.test(data[["comeron_100kb"]],omega_4f,method="spearman")
-#		cor.test(data[["comeron_100kb"]],omega_ins,method="spearman")
-#
-#	kruskal.test(omega_4f~data[["mcvean_10kb"]])
-#	kruskal.test(omega_4f~data[["mcvean_100kb"]])
-#	kruskal.test(omega_4f~data[["mcvean_1Mb"]])
-#	kruskal.test(omega_4f~data[["comeron_100kb"]])
-#
-#	kruskal.test(omega_ins~data[["mcvean_10kb"]])
-#	kruskal.test(omega_ins~data[["mcvean_100kb"]])
-#	kruskal.test(omega_ins~data[["mcvean_1Mb"]])
-#	kruskal.test(omega_ins~data[["comeron_100kb"]])	
-#	
-#
+  # REV ?
+  data[["mcvean_10kb"]] = cut(data[["mcvean_10kb"]],quantile(data[["mcvean_10kb"]],(0:5)/5))
+  data[["mcvean_100kb"]] = cut(data[["mcvean_100kb"]],quantile(data[["mcvean_100kb"]],(0:5)/5))
+  data[["mcvean_1Mb"]] = cut(data[["mcvean_1Mb"]],quantile(data[["mcvean_1Mb"]],(0:5)/5))
+  data[["comeron_100kb"]] = cut(data[["comeron_100kb"]],quantile(data[["comeron_100kb"]],(0:5)/5))
+	
+  cat("#tapply sum m~mcvean_10kb", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, data$mcvean_10kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~mcvean_100kb", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, data$mcvean_100kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~comeron_100kb", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, data$comeron_100kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+	
+  png( "GENES-autosomes-FEAT9Recombination_omega4f-mcvean10Kb.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["mcvean_10kb"]],outline=F,xlab="rho 10kb",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+
+  png( "GENES-autosomes-FEAT9Recombination_omega4f-mcvean100Kb.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["mcvean_100kb"]],outline=F,xlab="rho 100kb",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+
+  png( "GENES-autosomes-FEAT9Recombination_omega4f-mcvean1Mb.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["mcvean_1Mb"]],outline=F,xlab="rho 1Mb",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")	
+  dev.off()
+
+  png( "GENES-autosomes-FEAT9Recombination_omega4f-comeron100Kb.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data[["comeron_100kb"]],outline=F,xlab="cM/Mb 100kb",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")	
+  dev.off()
+
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[1], labels="Quantile 0% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[2], labels="Quantile 20% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[3], labels="Quantile 40% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[4], labels="Quantile 60% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[5], labels="Quantile 80% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_10kb, ( 0:5 ) / 5 )[6], labels="Quantile 100% (mcvean_10kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$mcvean_10kb ), file="OUT_GENES-autosomes", fill=T, labels="Median (mcvean_10kb)", append=T)
+  cat( mean( data$mcvean_10kb ), file="OUT_GENES-autosomes", fill=T, labels="Mean (mcvean_10kb)", append=T)
+  cat( sd( data$mcvean_10kb ), file="OUT_GENES-autosomes", fill=T, labels="SD (mcvean_10kb)", append=T)
+	
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[1], labels="Quantile 0% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[2], labels="Quantile 20% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[3], labels="Quantile 40% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[4], labels="Quantile 60% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[5], labels="Quantile 80% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_100kb, ( 0:5 ) / 5 )[6], labels="Quantile 100% (mcvean_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$mcvean_100kb ), file="OUT_GENES-autosomes", fill=T, labels="Median (mcvean_100kb)", append=T)
+  cat( mean( data$mcvean_100kb ), file="OUT_GENES-autosomes", fill=T, labels="Mean (mcvean_100kb)", append=T)
+  cat( sd( data$mcvean_100kb ), file="OUT_GENES-autosomes", fill=T, labels="SD (mcvean_100kb)", append=T)
+
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[1], labels="Quantile 0% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[2], labels="Quantile 20% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[3], labels="Quantile 40% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[4], labels="Quantile 60% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[5], labels="Quantile 80% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$mcvean_1Mb, ( 0:5 ) / 5 )[6], labels="Quantile 100% (mcvean_1Mb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$mcvean_1Mb ), file="OUT_GENES-autosomes", fill=T, labels="Median (mcvean_1Mb)", append=T)
+  cat( mean( data$mcvean_1Mb ), file="OUT_GENES-autosomes", fill=T, labels="Mean (mcvean_1Mb)", append=T)
+  cat( sd( data$mcvean_1Mb ), file="OUT_GENES-autosomes", fill=T, labels="SD (mcvean_1Mb)", append=T)
+	
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[1], labels="Quantile 0% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[2], labels="Quantile 20% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[3], labels="Quantile 40% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[4], labels="Quantile 60% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[5], labels="Quantile 80% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( quantile( data$comeron_100kb, ( 0:5 ) / 5 )[6], labels="Quantile 100% (comeron_100kb)", file="OUT_GENES-autosomes", fill=T, append=T )
+  cat( median( data$comeron_100kb ), file="OUT_GENES-autosomes", fill=T, labels="Median (comeron_100kb)", append=T)
+  cat( mean( data$comeron_100kb ), file="OUT_GENES-autosomes", fill=T, labels="Mean (comeron_100kb)", append=T)
+  cat( sd( data$comeron_100kb ), file="OUT_GENES-autosomes", fill=T, labels="SD (comeron_100kb)", append=T)
+
+	
+  cat( cor.test(data$mcvean_10kb, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_10kb ~ omega_4f)", append=T)
+  cat( cor.test(data$mcvean_10kb, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_10kb ~ omega_4f)", append=T)
+
+  cat( cor.test(data$mcvean_10kb, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_10kb ~ omega_ins)", append=T)
+  cat( cor.test(data$mcvean_10kb, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_10kb ~ omega_ins)", append=T)
+
+  cat( cor.test(data$mcvean_100kb, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_100kb ~ omega_4f)", append=T)
+  cat( cor.test(data$mcvean_100kb, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_100kb ~ omega_4f)", append=T)
+
+  cat( cor.test(data$mcvean_100kb, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_100kb ~ omega_ins)", append=T)
+  cat( cor.test(data$mcvean_100kb, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_100kb ~ omega_ins)", append=T)
+
+  cat( cor.test(data$mcvean_1Mb, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_1Mb ~ omega_4f)", append=T)
+  cat( cor.test(data$mcvean_1Mb, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_1Mb ~ omega_4f)", append=T)
+
+  cat( cor.test(data$mcvean_1Mb, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (mcvean_1Mb ~ omega_ins)", append=T)
+  cat( cor.test(data$mcvean_1Mb, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (mcvean_1Mb ~ omega_ins)", append=T)
+
+  cat( cor.test(data$comeron_100kb, omega_4f, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (comeron_100kb ~ omega_4f)", append=T)
+  cat( cor.test(data$comeron_100kb, omega_4f, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (comeron_100kb ~ omega_4f)", append=T)
+
+  cat( cor.test(data$comeron_100kb, omega_ins, method="spearman")$estimate, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman Rho (comeron_100kb ~ omega_ins)", append=T)
+  cat( cor.test(data$comeron_100kb, omega_ins, method="spearman")$p.value, file = "OUT_GENES-autosomes" , fill=T, labels="Spearman p-value (comeron_100kb ~ omega_ins)", append=T)
+
+
+  cat( kruskal.test( omega_4f ~ data$mcvean_10kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_4f ~ mcvean_10kb)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$mcvean_10kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_4f ~ mcvean_10kb)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$mcvean_100kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_4f ~ mcvean_100kb)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$mcvean_100kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_4f ~ mcvean_100kb)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$mcvean_1Mb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_4f ~ mcvean_1Mb)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$mcvean_1Mb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_4f ~ mcvean_1Mb)", append=T  )
+
+  cat( kruskal.test( omega_4f ~ data$comeron_100kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_4f ~ comeron_100kb)", append=T  )
+  cat( kruskal.test( omega_4f ~ data$comeron_100kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_4f ~ comeron_100kb)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$mcvean_10kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ mcvean_10kb)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$mcvean_10kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ mcvean_10kb)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$mcvean_100kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ mcvean_100kb)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$mcvean_100kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ mcvean_100kb)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$mcvean_1Mb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ mcvean_1Mb)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$mcvean_1Mb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ mcvean_1Mb)", append=T  )
+
+  cat( kruskal.test( omega_ins ~ data$comeron_100kb)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ comeron_100kb)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$comeron_100kb)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ comeron_100kb)", append=T  )
+
+	
+
 #				### Expression Vs Recombination ###
 #				cor.test(data[["bias_dev_rpkm"]],pi4f,method="spearman")
 #				cor.test(data[["bias_dev_rpkm"]],t4f,method="spearman")
@@ -772,6 +841,11 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #	boxplot(omega_4f~data$chromatin,outline=F,xlab="Chromatin States",ylab="Ka/Ks")
 #	abline(h=median(omega_4f),col="black")	
 #	kruskal.test(omega_ins~data[["chromatin"]])
+
+# FIN
+# FIN
+# FIN
+
 #	
 #	mA <- ((data[["a_s2_0f"]]+data[["a_bg_0f"]]+ data[["a_s2_4f"]]+data[["a_bg_4f"]]+ data[["a_s2_2f"]]+data[["a_bg_2f"]])/2)
 #	mB <- ((data[["b_s2_0f"]]+data[["b_bg_0f"]]+ data[["b_s2_4f"]]+data[["b_bg_4f"]]+ data[["b_s2_2f"]]+data[["b_bg_2f"]])/2)
