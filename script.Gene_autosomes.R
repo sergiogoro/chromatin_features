@@ -1,4 +1,4 @@
-#
+#               # REV label for any line needing revision
 # GENES
 #
 # Dos datasets:
@@ -649,19 +649,26 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   cat( "##Feature9: Recombination\n", file="OUT_GENES-autosomes", append=T )
 
   # REV ?
-  data[["mcvean_10kb"]] = cut(data[["mcvean_10kb"]],quantile(data[["mcvean_10kb"]],(0:5)/5))
-  data[["mcvean_100kb"]] = cut(data[["mcvean_100kb"]],quantile(data[["mcvean_100kb"]],(0:5)/5))
-  data[["mcvean_1Mb"]] = cut(data[["mcvean_1Mb"]],quantile(data[["mcvean_1Mb"]],(0:5)/5))
-  data[["comeron_100kb"]] = cut(data[["comeron_100kb"]],quantile(data[["comeron_100kb"]],(0:5)/5))
+  #data[["mcvean_10kb"]] = cut(data[["mcvean_10kb"]],quantile(data[["mcvean_10kb"]],(0:5)/5))
+  #data[["mcvean_100kb"]] = cut(data[["mcvean_100kb"]],quantile(data[["mcvean_100kb"]],(0:5)/5))
+  #data[["mcvean_1Mb"]] = cut(data[["mcvean_1Mb"]],quantile(data[["mcvean_1Mb"]],(0:5)/5))
+  #data[["comeron_100kb"]] = cut(data[["comeron_100kb"]],quantile(data[["comeron_100kb"]],(0:5)/5))
+  mcvean_10kb_Factor   <- cut(data[["mcvean_10kb"]],quantile(data[["mcvean_10kb"]],(0:5)/5))
+  mcvean_100kb_Factor  <- cut(data[["mcvean_100kb"]],quantile(data[["mcvean_100kb"]],(0:5)/5))
+  mcvean_1Mb_Factor    <- cut(data[["mcvean_1Mb"]],quantile(data[["mcvean_1Mb"]],(0:5)/5))
+  comeron_100kb_Factor <- cut(data[["comeron_100kb"]],quantile(data[["comeron_100kb"]],(0:5)/5))
 	
   cat("#tapply sum m~mcvean_10kb", file="OUT_GENES-autosomes", append=T)
-  write.table( tapply( m, data$mcvean_10kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  write.table( tapply( m, mcvean_10kb_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
   cat("#tapply sum m~mcvean_100kb", file="OUT_GENES-autosomes", append=T)
-  write.table( tapply( m, data$mcvean_100kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  write.table( tapply( m, mcvean_100kb_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+
+  cat("#tapply sum m~mcvean_1Mb", file="OUT_GENES-autosomes", append=T)
+  write.table( tapply( m, mcvean_1Mb_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
   cat("#tapply sum m~comeron_100kb", file="OUT_GENES-autosomes", append=T)
-  write.table( tapply( m, data$comeron_100kb, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  write.table( tapply( m, comeron_100kb_Factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 	
   png( "GENES-autosomes-FEAT9Recombination_omega4f-mcvean10Kb.png", width = 1920, height = 1080 )
 	boxplot(omega_4f~data[["mcvean_10kb"]],outline=F,xlab="rho 10kb",ylab="Ka/Ks")
@@ -826,21 +833,31 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #				# a 10 kb hay correlacion positiva entre Dbias y recombincion, y negativa entre Smax y recombinacion. Los genes housekeeping estan en regiones de baja recomb
 #				# o donde estan los genes housekeeping hay subestimas de recombinacion? demasiado bonito para ser verdad, seguramete sera la segunda opcion.... :S
 #
-#	### Chromosomes ###
-#
-#	#data <- subset(data,chro_fraction > 0.5)
-#	#nrow(data)
-#	boxplot(omega_4f~data$chromosome,outline=F,xlab="Chromosomes",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")
-#	kruskal.test(omega_ins~data[["chromosome"]])
-#
-#	### Chromatin ###
-#
-#	#data <- subset(data,chro_fraction > 0.5)
-#	#nrow(data)
-#	boxplot(omega_4f~data$chromatin,outline=F,xlab="Chromatin States",ylab="Ka/Ks")
-#	abline(h=median(omega_4f),col="black")	
-#	kruskal.test(omega_ins~data[["chromatin"]])
+	### Chromosomes ###
+
+  #data <- subset(data,chro_fraction > 0.5) # REV: Commented, because otherwise the following boxplot won't work (!= lengths)
+	#nrow(data)
+
+  png( "GENES-autosomes-FEAT11Chromosomes_omega4f-chromosome.png", width = 1920, height = 1080 )
+	boxplot(omega_4f~data$chromosome,outline=F,xlab="Chromosomes",ylab="Ka/Ks")
+	abline(h=median(omega_4f),col="black")
+  dev.off()
+
+  cat( kruskal.test( omega_ins ~ data$chromosome)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ chromosome)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$chromosome)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ chromosome)", append=T  )
+
+	### Chromatin ###
+
+	#data <- subset(data,chro_fraction > 0.5) # REV: Commented, because otherwise the following boxplot won't work (!= lengths)
+	#nrow(data)
+
+  png( "GENES-autosomes-FEAT12Chromatin_omega4f-chromatin.png", width = 1920, height = 1080 )
+	boxplot( omega_4f ~ data$chromatin, outline=F, xlab="Chromatin States", ylab="Ka/Ks" )
+	abline( h = median( omega_4f ), col="black" )
+  dev.off()
+
+  cat( kruskal.test( omega_ins ~ data$chromatin)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ chromatin)", append=T  )
+  cat( kruskal.test( omega_ins ~ data$chromatin)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ chromatin)", append=T  )
 
 # FIN
 # FIN
