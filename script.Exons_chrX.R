@@ -54,12 +54,12 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 ### Summary ###
 
 ### EXON ###
-    cat("###EXONS-chrX\n\n", file="OUT_EXONS-chrX", append=T)
     #If exists previous file, move it to .bak
     if (file.exists("OUT_EXONS-chrX")) {
         file.rename("OUT_EXONS-chrX", "OUT_EXONS-chrX.bak")
         file.remove("OUT_EXONS-chrX")   #Remove previous file
     }
+    cat("###EXONS-chrX\n\n", file="OUT_EXONS-chrX", append=T)
 
     #Feature 1
 	### Transcripts (mRNAs per exon) ###
