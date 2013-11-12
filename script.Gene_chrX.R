@@ -22,7 +22,7 @@ setwd(mypath)
 # Load datasets
 data <- read.table(file="GENE.SHORTINTRONS.n",header=TRUE,sep="\t")
 #nrow(data)
-data <- subset(data, chromosome != "X")                     #AUTOSOMES
+data <- subset(data, chromosome == "X")                     #AUTOSOMES
 data <- na.omit(data) #para el modelo mixto
 
 ### PopGen Summary Statistics ###
@@ -113,15 +113,15 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   cat("#tapply sum m~chromatin", file="OUT_GENES-autosomes", append=T)
 	write.table( tapply(m, data$chromatin, sum), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
 
-  cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-  cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-  cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-  cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  #cat( kruskal.test( omega_4f ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  #cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  #cat( kruskal.test( omega_ins ~ data[["chromosome"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
 
-  cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-  cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
-  cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-  cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
+  #cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+  #cat( kruskal.test( omega_4f ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_4f K-W p-value", append=T  )
+  #cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$statistic, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+  #cat( kruskal.test( omega_ins ~ data[["chromatin"]] )$p.value, file = "OUT_GENES-autosomes", fill=T, labels="Omega_ins K-W p-value", append=T  )
 
   #Feature 3
   ### Transcripts ###
@@ -832,7 +832,7 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #			    spcor(gene,method=c("spearman"))
 #				# a 10 kb hay correlacion positiva entre Dbias y recombincion, y negativa entre Smax y recombinacion. Los genes housekeeping estan en regiones de baja recomb
 #				# o donde estan los genes housekeeping hay subestimas de recombinacion? demasiado bonito para ser verdad, seguramete sera la segunda opcion.... :S
-
+#
   #Feature 11
 	### Chromosomes ###
   cat( "\n", file="OUT_GENES-autosomes", append=T )
@@ -846,8 +846,8 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 	abline(h=median(omega_4f),col="black")
   dev.off()
 
-  cat( kruskal.test( omega_ins ~ data$chromosome)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ chromosome)", append=T  )
-  cat( kruskal.test( omega_ins ~ data$chromosome)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ chromosome)", append=T  )
+  #cat( kruskal.test( omega_ins ~ data$chromosome)$statistic, file = "OUT_GENES-autosomes", fill=T, labels="K-W chi-squared (omega_ins ~ chromosome)", append=T  )
+  #cat( kruskal.test( omega_ins ~ data$chromosome)$p.value, file = "OUT_GENES-autosomes", fill=T, labels="K-W p-value (omega_ins ~ chromosome)", append=T  )
 
   #Feature 12
 	### Chromatin ###
