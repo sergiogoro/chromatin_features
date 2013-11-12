@@ -6,7 +6,7 @@
 #   B) GENE.SHORTINTRONS.n
 #
 # Filtros:
-#   B) Genes
+#   B) GENES
 #       B.1)
 #           data <- na.omit(data) #para el modelo mixto
 #
@@ -230,7 +230,8 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
   context_distance_factor = cut(data$context_distance,quantile(data$context_distance,(0:5)/5))
   #summary(data[["context_distance"]])
   cat("#tapply sum m~context_distance", file="OUT_GENES-autosomes", append=T)
-  write.table( tapply( m, data$context_distance, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  write.table( tapply( m, context_distance_factor, sum ), file="OUT_GENES-autosomes", quote=T, row.names=T, append=T )
+  # Rev m
 	
   png( "GENES-autosomes-FEAT5MeanDistanceBetweenExons_logContextDistance-logOmega4f.png", width = 1920, height = 1080 )
   plot( log(data$context_distance), log(omega_4f) )

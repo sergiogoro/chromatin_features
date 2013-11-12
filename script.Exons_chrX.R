@@ -54,20 +54,20 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 ### Summary ###
 
 ### EXON ###
-    cat("###EXONS-chrX\n\n", file="OUT_Exons-autosomes", append=T)
+    cat("###EXONS-chrX\n\n", file="OUT_EXONS-chrX", append=T)
     #If exists previous file, move it to .bak
-    if (file.exists("OUT_Exons-chrX")) {
-        file.rename("OUT_Exons-chrX", "OUT_Exons-chrX.bak")
-        file.remove("OUT_Exons-chrX")   #Remove previous file
+    if (file.exists("OUT_EXONS-chrX")) {
+        file.rename("OUT_EXONS-chrX", "OUT_EXONS-chrX.bak")
+        file.remove("OUT_EXONS-chrX")   #Remove previous file
     }
 
     #Feature 1
 	### Transcripts (mRNAs per exon) ###
-		cat("##Feature1: mRNAs per exon\n", file="OUT_Exons-chrX", append=T)
+		cat("##Feature1: mRNAs per exon\n", file="OUT_EXONS-chrX", append=T)
 
         #Suma
-		cat("#tapply sum m~data$num_FBtrs", file="OUT_Exons-chrX", append=T)
-        write.table(tapply(m, data$num_FBtrs, sum), file="OUT_Exons-chrX", row.names=T, quote=T, append=T)
+		cat("#tapply sum m~data$num_FBtrs", file="OUT_EXONS-chrX", append=T)
+        write.table(tapply(m, data$num_FBtrs, sum), file="OUT_EXONS-chrX", row.names=T, quote=T, append=T)
 
 		num_FBtrs_factor = cut( data[["num_FBtrs"]], c( 0, 1, 2, 75 ) )
 		
@@ -81,29 +81,29 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
         abline( h = median( omega_ins ), col="black" )
         dev.off()
 
-        cat( cor.test(omega_4f, data$num_FBtrs, method="spearman")$estimate, labels="Omega_4f Spearman Rho", file = "OUT_Exons-chrX", fill=T, append=T)
-        cat( cor.test(omega_4f, data$num_FBtrs, method="spearman")$p.value, labels="Omega_4f Spearman p-value", file = "OUT_Exons-chrX", fill=T, append=T  )
-		cat( cor.test(omega_ins, data$num_FBtrs, method="spearman")$estimate, labels="Omega_ins Spearman Rho", file = "OUT_Exons-chrX" , fill=T, append=T  )
-		cat( cor.test(omega_ins, data$num_FBtrs, method="spearman")$p.value, labels="Omega_ins Spearman p-value", file = "OUT_Exons-chrX" , fill=T, append=T  )
+        cat( cor.test(omega_4f, data$num_FBtrs, method="spearman")$estimate, labels="Omega_4f Spearman Rho", file = "OUT_EXONS-chrX", fill=T, append=T)
+        cat( cor.test(omega_4f, data$num_FBtrs, method="spearman")$p.value, labels="Omega_4f Spearman p-value", file = "OUT_EXONS-chrX", fill=T, append=T  )
+		cat( cor.test(omega_ins, data$num_FBtrs, method="spearman")$estimate, labels="Omega_ins Spearman Rho", file = "OUT_EXONS-chrX" , fill=T, append=T  )
+		cat( cor.test(omega_ins, data$num_FBtrs, method="spearman")$p.value, labels="Omega_ins Spearman p-value", file = "OUT_EXONS-chrX" , fill=T, append=T  )
 		
-        cat( kruskal.test( omega_4f ~ num_FBtrs_factor )$statistic, labels="Omega_4f K-W chi-squared", file = "OUT_Exons-chrX", fill=T, append=T  )
-		cat( kruskal.test( omega_4f ~ num_FBtrs_factor )$p.value, labels="Omega_4f K-W p-value", file = "OUT_Exons-chrX", fill=T, append=T  )
-		cat( kruskal.test( omega_ins ~ num_FBtrs_factor )$statistic, labels="Omega_ins K-W chi-squared", file = "OUT_Exons-chrX", fill=T, append=T  )
-		cat( kruskal.test( omega_ins ~ num_FBtrs_factor )$p.value, labels="Omega_ins K-W p-value", file = "OUT_Exons-chrX", fill=T, append=T  )
+        cat( kruskal.test( omega_4f ~ num_FBtrs_factor )$statistic, labels="Omega_4f K-W chi-squared", file = "OUT_EXONS-chrX", fill=T, append=T  )
+		cat( kruskal.test( omega_4f ~ num_FBtrs_factor )$p.value, labels="Omega_4f K-W p-value", file = "OUT_EXONS-chrX", fill=T, append=T  )
+		cat( kruskal.test( omega_ins ~ num_FBtrs_factor )$statistic, labels="Omega_ins K-W chi-squared", file = "OUT_EXONS-chrX", fill=T, append=T  )
+		cat( kruskal.test( omega_ins ~ num_FBtrs_factor )$p.value, labels="Omega_ins K-W p-value", file = "OUT_EXONS-chrX", fill=T, append=T  )
 
 	
     #Feature 2
 	### Exon Representativity ### 
-		cat("\n", file="OUT_Exons-chrX", append=T)
-		cat("##Feature2: Exon Representativity\n", file="OUT_Exons-chrX", append=T)
+		cat("\n", file="OUT_EXONS-chrX", append=T)
+		cat("##Feature2: Exon Representativity\n", file="OUT_EXONS-chrX", append=T)
 
 		Erep <- ( data[["num_FBtrs"]] / data[["FBtrs_per_gene"]] )
         #summary( Erep )
 	
         #Suma
         alternative <- cut( Erep, c( 0, 0.25, 0.5, 0.99, 1 ) )
-		cat("#tapply sum m~alternative", file="OUT_Exons-chrX", append=T)
-        write.table( tapply( m, alternative, sum ), file="OUT_Exons-chrX", quote=T, row.names=T, append=T )
+		cat("#tapply sum m~alternative", file="OUT_EXONS-chrX", append=T)
+        write.table( tapply( m, alternative, sum ), file="OUT_EXONS-chrX", quote=T, row.names=T, append=T )
 
         png( "EXONS-chrX-FEAT2Erep_omega4f-exonRepresentativity.png", width = 1920, height = 1080 )
 		boxplot( omega_4f ~ alternative, outline=F, xlab="Exon Representativity", ylab="Ka/Ks" )
@@ -114,37 +114,37 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 		hist( Erep, breaks = c( 100 ) )
         dev.off()
 
-        cat( quantile( Erep, ( 0:2 ) / 2 )[1], labels="Quantile 0%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( Erep, ( 0:2 ) / 2 )[2], labels="Quantile 50%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( Erep, ( 0:2 ) / 2 )[3], labels="Quantile 100%", file="OUT_Exons-chrX", fill=T, append=T )
+        cat( quantile( Erep, ( 0:2 ) / 2 )[1], labels="Quantile 0%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( Erep, ( 0:2 ) / 2 )[2], labels="Quantile 50%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( Erep, ( 0:2 ) / 2 )[3], labels="Quantile 100%", file="OUT_EXONS-chrX", fill=T, append=T )
 		
-        cat(median( Erep ), file="OUT_Exons-chrX", fill=T, labels="Median", append=T)
-		cat(mean( Erep ), file="OUT_Exons-chrX", fill=T, labels="Mean", append=T)
-        cat(sd( Erep ), file="OUT_Exons-chrX", fill=T, labels="SD", append=T)
+        cat(median( Erep ), file="OUT_EXONS-chrX", fill=T, labels="Median", append=T)
+		cat(mean( Erep ), file="OUT_EXONS-chrX", fill=T, labels="Mean", append=T)
+        cat(sd( Erep ), file="OUT_EXONS-chrX", fill=T, labels="SD", append=T)
 
-        cat( cor.test(omega_4f, Erep, method="spearman")$estimate, file = "OUT_Exons-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
-        cat( cor.test(omega_4f, Erep, method="spearman")$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
-		cat( cor.test(omega_ins, Erep, method="spearman")$estimate, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
-		cat( cor.test(omega_ins, Erep, method="spearman")$p.value, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+        cat( cor.test(omega_4f, Erep, method="spearman")$estimate, file = "OUT_EXONS-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
+        cat( cor.test(omega_4f, Erep, method="spearman")$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
+		cat( cor.test(omega_ins, Erep, method="spearman")$estimate, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
+		cat( cor.test(omega_ins, Erep, method="spearman")$p.value, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
 
-        cat( kruskal.test( omega_4f ~ alternative )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_4f ~ alternative )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
-		cat( kruskal.test( omega_ins ~ alternative )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_ins ~ alternative )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
+        cat( kruskal.test( omega_4f ~ alternative )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_4f ~ alternative )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
+		cat( kruskal.test( omega_ins ~ alternative )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_ins ~ alternative )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
 		
 		
     #Feature 3
 	### Order ###
-		cat("\n", file="OUT_Exons-chrX", append=T)
-		cat("##Feature3: Order\n", file="OUT_Exons-chrX", append=T)
+		cat("\n", file="OUT_EXONS-chrX", append=T)
+		cat("##Feature3: Order\n", file="OUT_EXONS-chrX", append=T)
 
-		cat("#tapply sum m~data$order", file="OUT_Exons-chrX", append=T)
-        write.table( tapply(m, data$order, sum), file="OUT_Exons-chrX", quote=T, row.names=T, append=T)
+		cat("#tapply sum m~data$order", file="OUT_EXONS-chrX", append=T)
+        write.table( tapply(m, data$order, sum), file="OUT_EXONS-chrX", quote=T, row.names=T, append=T)
 		
 		order_intervals = cut(data$order,c(0,1,2,4,109))    #Revisar factores
         #summary(order_intervals)
-		cat("#tapply sum m~order_intervals", file="OUT_Exons-chrX", append=T)
-        write.table( tapply(m, order_intervals, sum), file="OUT_Exons-chrX", quote=T, row.names=T, append=T)
+		cat("#tapply sum m~order_intervals", file="OUT_EXONS-chrX", append=T)
+        write.table( tapply(m, order_intervals, sum), file="OUT_EXONS-chrX", quote=T, row.names=T, append=T)
 
         png( "EXONS-chrX-FEAT3Order_omega4f-orderIntervals.png", width = 1920, height = 1080 )
 		boxplot(omega_4f~order_intervals,outline=F,xlab="Exon Order",ylab="Ka/Ks") 
@@ -155,38 +155,38 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
         boxplot(m~order_intervals,outline=F,xlab="Exon Order",ylab="m") 
         dev.off()
 
-        cat( cor.test(data$order, omega_4f, method="spearman")$estimate, file = "OUT_Exons-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
-        cat( cor.test(data$order, omega_4f, method="spearman")$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
-		cat( cor.test(data$order, omega_ins, method="spearman")$estimate, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
-		cat( cor.test(data$order, omega_ins, method="spearman")$p.value, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+        cat( cor.test(data$order, omega_4f, method="spearman")$estimate, file = "OUT_EXONS-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
+        cat( cor.test(data$order, omega_4f, method="spearman")$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
+		cat( cor.test(data$order, omega_ins, method="spearman")$estimate, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
+		cat( cor.test(data$order, omega_ins, method="spearman")$p.value, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
 
-        cat( kruskal.test( omega_4f ~ order_intervals )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_4f ~ order_intervals )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
-		cat( kruskal.test( omega_ins ~ order_intervals )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_ins ~ order_intervals )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
+        cat( kruskal.test( omega_4f ~ order_intervals )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_4f ~ order_intervals )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
+		cat( kruskal.test( omega_ins ~ order_intervals )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_ins ~ order_intervals )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
 		
 
     #Feature 4
 	### Exon Length ###
-	    cat("\n", file="OUT_Exons-chrX", append=T)
-	    cat("#Feature4: Exon length\n", file="OUT_Exons-chrX", append=T)
+	    cat("\n", file="OUT_EXONS-chrX", append=T)
+	    cat("#Feature4: Exon length\n", file="OUT_EXONS-chrX", append=T)
 
 	    m5 = cut(m,quantile(m,(0:5)/5))
 	    m3 = cut(m,c(0,405,733,12903))
-		cat("#tapply sum m~m5", file="OUT_Exons-chrX", append=T)
-	    write.table( tapply(m,m5,sum), file="OUT_Exons-chrX", quote=T, row.names=T, append=T)
+		cat("#tapply sum m~m5", file="OUT_EXONS-chrX", append=T)
+	    write.table( tapply(m,m5,sum), file="OUT_EXONS-chrX", quote=T, row.names=T, append=T)
         #summary(m5)
 
-        cat( quantile( m, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( m, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( m, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( m, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( m, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_Exons-chrX", fill=T, append=T )
-        cat( quantile( m, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_Exons-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[1], labels="Quantile 0%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[2], labels="Quantile 20%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[3], labels="Quantile 40%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[4], labels="Quantile 60%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[5], labels="Quantile 80%", file="OUT_EXONS-chrX", fill=T, append=T )
+        cat( quantile( m, ( 0:5 ) / 5 )[6], labels="Quantile 100%", file="OUT_EXONS-chrX", fill=T, append=T )
 
-        cat(median( m ), file="OUT_Exons-chrX", fill=T, labels="Median", append=T)
-		cat(mean( m ), file="OUT_Exons-chrX", fill=T, labels="Mean", append=T)
-        cat(sd( m ), file="OUT_Exons-chrX", fill=T, labels="SD", append=T)
+        cat(median( m ), file="OUT_EXONS-chrX", fill=T, labels="Median", append=T)
+		cat(mean( m ), file="OUT_EXONS-chrX", fill=T, labels="Mean", append=T)
+        cat(sd( m ), file="OUT_EXONS-chrX", fill=T, labels="SD", append=T)
 
         png( "EXONS-chrX-FEAT4Elength_omega4f-m3.png", width = 1920, height = 1080 )
 	    boxplot( omega_4f~m3, outline=F, xlab="Exon Length", ylab="Ka/Ks" )
@@ -197,15 +197,15 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 	    boxplot( omega_ins~m3, outline=F, xlab="Exon Length", ylab="Ka/Kins")
 	    dev.off()
 
-        cat( cor.test(m, omega_4f, method="spearman")$estimate, file = "OUT_Exons-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
-        cat( cor.test(m, omega_4f, method="spearman")$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
-		cat( cor.test(m, omega_ins, method="spearman")$estimate, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
-		cat( cor.test(m, omega_ins, method="spearman")$p.value, file = "OUT_Exons-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
+        cat( cor.test(m, omega_4f, method="spearman")$estimate, file = "OUT_EXONS-chrX",fill=T, labels="Omega_4f Spearman Rho", append=T)
+        cat( cor.test(m, omega_4f, method="spearman")$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f Spearman p-value", append=T)
+		cat( cor.test(m, omega_ins, method="spearman")$estimate, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman Rho", append=T)
+		cat( cor.test(m, omega_ins, method="spearman")$p.value, file = "OUT_EXONS-chrX" , fill=T, labels="Omega_ins Spearman p-value", append=T)
 
-        cat( kruskal.test( omega_4f ~ m5 )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_4f ~ m5 )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
-		cat( kruskal.test( omega_ins ~ m5 )$statistic, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
-		cat( kruskal.test( omega_ins ~ m5 )$p.value, file = "OUT_Exons-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
+        cat( kruskal.test( omega_4f ~ m5 )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_4f ~ m5 )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_4f K-W p-value", append=T  )
+		cat( kruskal.test( omega_ins ~ m5 )$statistic, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W chi-squared", append=T  )
+		cat( kruskal.test( omega_ins ~ m5 )$p.value, file = "OUT_EXONS-chrX", fill=T, labels="Omega_ins K-W p-value", append=T  )
 		
 #### GENE ###
 #
@@ -222,9 +222,9 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #	
 #	mcomp2 = cut(mcomp,c(0,.25,0.4,0.5))
 #	mcomp5 = cut(mcomp,quantile(mcomp,(0:5)/5))
-#	boxplot(omega_4f~mcomp5,outline=F,xlab="Number of Transcripts/Number of Exons",ylab="Ka/Ks") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
+#	boxplot(omega_4f~mcomp5,outline=F,xlab="Number of Transcripts/Number of EXONS",ylab="Ka/Ks") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
 #	abline(h=median(omega_4f),col="black")
-#	boxplot(omega_ins~mcomp5,outline=F,xlab="Number of Transcripts/Number of Exons",ylab="Ka/Kins") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
+#	boxplot(omega_ins~mcomp5,outline=F,xlab="Number of Transcripts/Number of EXONS",ylab="Ka/Kins") #aquellos genes con mas transcritos q exones tienen menor omega q aquellos con menos transcritos q exones.
 #	abline(h=median(omega_ins),col="black")	
 #	        kruskal.test(omega_4f~mcomp5)
 #	        kruskal.test(omega_ins~mcomp5)
@@ -261,17 +261,17 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #		cor.test(pi4f,data$FBtrs_per_gene,method="spearman") #-0.069
 #		cor.test(piins,data$FBtrs_per_gene,method="spearman") #ns
 #
-#	### Number of Exons ###
+#	### Number of EXONS ###
 #	with(data,tapply(m,num_cds,sum))
 #	data <-subset(data, num_cds < 11)
 #	exons = cut(data[["num_cds"]],c(0,1,2,3,4,5,6,8,11,16,114))     #Revisar factores
 #	summary(exons)
 #	with(data,tapply(m,exons,sum))
 #
-#		boxplot(omega_4f~exons,outline=F,xlab="Number of Exons/Gene",ylab="Ka/Ks")
+#		boxplot(omega_4f~exons,outline=F,xlab="Number of EXONS/Gene",ylab="Ka/Ks")
 #		abline(h=median(omega_4f),col="black")
 #		
-#		boxplot(omega_ins~data[["num_cds"]],outline=F,xlab="Number of Exons/Gene",ylab="Ka/Kins")
+#		boxplot(omega_ins~data[["num_cds"]],outline=F,xlab="Number of EXONS/Gene",ylab="Ka/Kins")
 #		
 #		
 #		cor.test(omega_4f,data$num_cds,method="spearman") # -0.2219826 
@@ -284,7 +284,7 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #		cor.test(pi4f,data$num_cds,method="spearman") # +0.037
 #		cor.test(piins,data$num_cds,method="spearman") # +0.093
 #
-#	### Mean Distance between Exons ###
+#	### Mean Distance between EXONS ###
 #	plot(log(data$context_distance),log(omega_4f))
 #		
 #		cor.test(data$context_distance,omega_4f,method="spearman") # -0.24
@@ -315,14 +315,14 @@ m               <- data[["mdmel_0f"]] + data[["mdmel_4f"]] + data[["mdmel_2f"]]
 #	mean(data$stdev_distance)
 #	sd(data$stdev_distance)
 #	
-#	boxplot(omega_4f~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Ks")
+#	boxplot(omega_4f~data[["context_distance"]],outline=F,xlab="Mean Distance Between EXONS",ylab="Ka/Ks")
 #	abline(h=median(omega_4f),col="black")
 #	
-#	boxplot(omega_ins~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="Ka/Kins")
+#	boxplot(omega_ins~data[["context_distance"]],outline=F,xlab="Mean Distance Between EXONS",ylab="Ka/Kins")
 #	kruskal.test(omega_4f~data[["context_distance"]])
 #	kruskal.test(omega_ins~data[["context_distance"]])
 #	
-#	boxplot(m~data[["context_distance"]],outline=F,xlab="Mean Distance Between Exons",ylab="m")
+#	boxplot(m~data[["context_distance"]],outline=F,xlab="Mean Distance Between EXONS",ylab="m")
 #
 #	
 #	### Protein/Exon Length ###
