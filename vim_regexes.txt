@@ -1,0 +1,6 @@
+:%s/\(cor.test(\(.*\), \(.*\), method.*labels="\)\(.*Spearman.* \(\w*\)\)"/\1Spearman \5 (\2 \~ \3)"/
+# Improves Spearman rho label
+:%s/\(cor.test(\(.*\), \(.*\), method.*labels="\)\(.*Spearman.* \(\w*-\w*\)\)"/\1Spearman \5 (\2 \~ \3)"/
+# Improves Spearman p-value label
+:%s/\(kruskal.test(\(.*\) \~ \(.*\) )$.*labels="\).* K-W \(\w*-\w*\)/\1 K-W \4 (\2 \~ \3)/g
+# Improves Kruskal-Willis label
