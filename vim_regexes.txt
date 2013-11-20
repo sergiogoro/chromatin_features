@@ -1,6 +1,11 @@
 :%s/\(cor.test(\(.*\), \(.*\), method.*labels="\)\(.*Spearman.* \(\w*\)\)"/\1Spearman \5 (\2 \~ \3)"/
 # Improves Spearman rho label
+
 :%s/\(cor.test(\(.*\), \(.*\), method.*labels="\)\(.*Spearman.* \(\w*-\w*\)\)"/\1Spearman \5 (\2 \~ \3)"/
 # Improves Spearman p-value label
-:%s/\(kruskal.test(\(.*\) \~ \(.*\) )$.*labels="\).* K-W \(\w*-\w*\)/\1 K-W \4 (\2 \~ \3)/g
+
+:%s/\(kruskal.test(\(.*\) \~ \(.*\) )$.*labels="\).* K-W \(\w*-\w*\)/\1K-W \4 (\2 \~ \3)/g
 # Improves Kruskal-Willis label
+
+:%s/labels=" \(K-W.*\)data\[\["\(.*\)"\]\]\(.*\)"/labels="\1data$\2"/
+# Correct nested double quotes on some variables (ex: changes data[["variable"]] to data$variable)
